@@ -1,0 +1,727 @@
+/*
+body {
+    font-family: 'Advent Pro', sans-serif;
+    /*background-image: url("https://thumbs.dreamstime.com/b/%C3%A9l%C3%A9phants-de-for%C3%AAt-gabon-afrique-de-l-ouest-18449334.jpg");
+    ;
+    overflow-x: hidden; 
+    overflow-y: auto; 
+    
+    
+}*/
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background: #f5f5f5;
+   }
+
+.vertical-line{
+    border-left: 2px solid white;
+    display: inline-block;
+    height: 60px;
+    margin: 0 20px;
+  }
+
+
+#table-estimation {
+    border: none;
+  }
+
+.middle {
+    display: flex;
+    justify-content: space-around;
+}
+
+a {
+    text-decoration: none;
+}
+
+footer {
+    position: relative;
+    bottom:4px;
+    width: 100%;
+    padding-top: 5px;
+    height: 117px;            /* Footer height */
+  }
+
+
+.contents {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    flex-grow: 0;
+    
+}
+.paint {
+    width: 35%;
+    flex-grow: 1;
+    background-color: #77B5FE;
+    flex-direction: column;
+
+}
+
+.total {
+    display: flex ;
+    flex-direction: row-reverse;
+    background-image: url("images/made.jpg");
+}
+
+
+
+.img1{
+    width: 200px;
+    height: 200px;
+    border: 5px solid darkcyan;
+    border-radius: 100px 100px 100px 100px;
+    position:fixed;
+    bottom:10px;
+    left:500px;
+    opacity: 1;
+}
+
+.img3 {
+    width: 200px;
+    height: 180px;
+    border: 5px solid #77B5FE;
+    border-radius: 98px 98px 98px 98px;
+    position:fixed;
+    bottom:95px;
+    right:215px;
+    opacity: 1;
+}
+
+.img2 {
+    width: 200px;
+    height: 180px;
+    border: 5px solid green;
+    border-radius: 98px 98px 98px 98px;
+    position:fixed;
+    bottom:120px;
+    right:380px;
+    opacity: 1;
+}
+
+.img7 {
+    width: 80px;
+    height: 80px;
+    border: 5px solid #77B5FE;
+    border-radius: 100px 100px 100px 100px;
+    position:fixed;
+    bottom:305px;
+    left:555px;
+    opacity: 1;
+}
+.img8 {
+    width: 75px;
+    height: 75px;
+    border: 5px solid green;
+    border-radius: 100px 100px 100px 100px;
+    position:fixed;
+    top:105px;
+    left:805px;
+    opacity: 1;
+}
+
+.img9 {
+    width: 100px;
+    height: 100px;
+    border: 5px solid yellow;
+    border-radius: 100px 100px 100px 100px;
+    position:fixed;
+    top:100px;
+    left:685px;
+    opacity: 1;
+}
+
+
+.img6 {
+    width: 80px;
+    height: 80px;
+    border: 5px solid red;
+    border-radius: 100px 100px 100px 100px;
+    position:fixed;
+    bottom:40px;
+    right:305px;
+    opacity: 1;
+}
+
+.img5 {
+    width: 210px;
+    height: 210px;
+    border: 5px solid purple;
+    border-radius: 100px 100px 100px 100px;
+    opacity: 1;
+}
+
+/*
+.fristi-page {
+    border: 1px solid;
+    background-color: #77B5FE;
+    margin: 0 20px auto 25px;
+    border-radius: 45px 45px 45px 45px;
+}
+*/
+
+.container-options{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+     
+}
+
+
+.btn-head {
+    height: 40px;
+    width: auto;
+    background-color: gray;
+    border-radius: 5px 5px 5px 5px;
+   
+}
+
+.container-head {
+    border: 2px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: green;
+    
+}
+
+.titre {
+    background-color: darkblue;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+
+   
+    /*margin-top: 10px;*/
+}
+
+.nav-list {
+    list-style-type: none;
+}
+.nav-list .list-items {
+
+    display: inline-block;
+    padding: 20px 10px;
+}
+
+.titre a {
+    color: white;
+}
+
+.titre a:hover {
+    color: green;
+}
+.logo {
+    left: 0;
+    height: 80px;
+    width: 180px;
+}
+
+.menu-line {
+    width: 20px;
+    height: 3px;
+    background-color: white;
+    margin-bottom: 4px;
+}
+
+label {
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+
+h3 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    color: aliceblue;
+}
+
+li {
+    font-size: large;
+    list-style-type: none;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+}
+
+.container-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-items: space-between;
+}
+
+.btn {
+    padding: 20px 20px 20px 20px;
+    margin: 10px;
+}
+
+.content-database {
+    scroll-behavior: auto;
+    width: auto;
+    height: auto;
+}
+
+
+.acceuil {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-between;
+    width: 200px;
+    height: 310px;
+    margin: 20px 20px 20px 80px;
+    background-color: white;
+}
+
+.btn-estimate {
+    border:0;
+    outline:0;
+    border-bottom:1px solid black;
+    width: 80%;
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: normal;
+    
+    
+}
+
+#pays {
+    border:0;
+    outline:0;
+    width: 80%;
+    margin-bottom: 80px;
+    font-size: 15px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+.estimer {
+    background-color: green;
+    border-radius: 10px 10px 10px 10px;
+    margin: 90px 10px 0px 40px;
+    width: 100px;
+}
+
+
+#trans-title {
+    display: none;
+    margin-left: 45px;
+
+}
+/* les bouttons menu ici */
+
+.container {
+    display: inline-block;
+    cursor: pointer;
+    position: absolute;
+  }
+  
+.bar1, .bar2, .bar3 {
+    width: 20px;
+    height: 2px;
+    background-color: white;
+    margin: 6px 0 0 6px;
+    transition: 0.4s;
+  }
+  
+/* Rotate first bar */
+.change .bar1 {
+    transform: translate(0, 11px) rotate(-45deg);
+  }
+  
+  /* Fade out the second bar */
+.change .bar2 {
+    opacity: 0;
+}
+  
+  /* Rotate last bar */
+.change .bar3 {
+    transform: translate(0, -11px) rotate(45deg);
+  }
+
+
+.column2 {
+    display: flex;
+    flex-direction: row;
+}
+
+/* choosing the option nancy service or send money */
+
+/*.choose {
+    
+    
+}
+*/
+
+
+/*
+.result-estimer {
+    display: "none";
+    left: 350px;
+    right: 50px;
+    position: relative;
+}
+*/
+/*
+
+.column1 {
+    
+    width: 100%;
+    position: fixed;  Make it stick/fixed 
+   
+   
+
+}
+*/
+
+#cancel, #suivant {
+
+    padding: 2px 5px 2px 5px;
+    border-radius: 7px 7px 7px 7px;
+    background-color: white;
+    margin: 2px 4px 2px 5px;
+}
+
+.cont1 {
+    height: 100%;
+}
+
+.cont2 {
+    display: none;
+}
+.cont2-ex {
+    display: none;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+fieldset {
+    display: none;
+    border: 3px solid white;
+    border-radius: 45px 45px 45px 45px;
+    flex-direction: row;
+    margin: 19px;
+}
+
+fieldset .cont2-ex {
+    flex: 2 1 auto;
+}
+
+fieldset .cont2 {
+    flex: 1 1 auto;
+}
+
+.cont3 {
+    display: none;
+    position: relative;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+#trans-title {
+    text-justify: center;
+    color: white;
+    font-style: italic;
+    font-size: bold;
+    margin-left: 30%;
+}
+
+
+table {
+    color: black;
+    background-color: #77B5FE;
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    margin-left:auto; 
+    margin-right:auto;
+    left: 40%;
+    border: 4px solid black;
+}
+#table1 {
+    font-size: medium;
+    border-collapse: collapse;
+    margin: auto;
+    font-family: cursive;
+}
+#table1 thead {
+    color:  white;
+    font-size : 4px;
+}
+
+#table1 tbody {
+    font-weight: bold;
+}
+
+#table1 tr {
+    border-bottom :0.5px solid black;
+    padding: 5px;
+    font-size: medium;
+}
+
+#table1 td {
+    border-top: 0.5px solid;
+    padding: 5px;
+    border-color: white;
+    color: white;
+}
+
+#bubble{
+    position: relative;
+    top: 20px;
+    background-color:white;
+    text-align:center;
+    width:290px;
+    height:112px;
+    border:2px solid #555555;
+    margin-left: auto;
+    margin-right: 6px;
+    white-space: nowrap;
+}
+
+#bubble ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    
+}  
+
+#bubble  ul  li {
+
+    display: inline-block;
+    justify-content: space-around;
+    justify-items: flex-start;
+    align-items: flex-start;
+    margin: 5px;
+   
+
+}
+
+.icone {
+    height:30px;
+    width: 30px;
+    margin: 2px 25px 1px -50px;
+}
+
+.icone > #transf {
+
+    margin: 2px 22px 1px -68px; 
+}
+
+     
+#arrow_inner{
+    
+    width:0;
+    height:0;
+    line-height:0;
+    top: 100px;
+    border-bottom:30px solid transparent;
+    border-left:30px solid transparent;
+    border-right:30px solid white; /* couleur du fond de la bulle */
+    transform: rotate(-90deg);
+     
+}
+
+.choose ul li div {
+    margin: 1px 10px 2px 1px;
+}
+
+.pied {
+    width: 132px;
+    height: 32px;
+    margin: 2px 5px 1px 3px;
+}
+
+#copyrightEtIcons {
+    display: flex;
+    margin-bottom: 2px;
+    margin-top: 5px;
+    padding: 0 10%;
+
+}
+#copyright {
+    width: 50%;
+    text-align: left;
+    color: #FFFAE1;
+}
+
+#icons {
+    width: 50%;
+    text-align: right;
+    margin-bottom: 10px;
+}
+#icons a {
+    display: inline-block;
+    padding: 0 15px;
+    font-size: 1.3em;
+    color: #FFFAE1;
+}
+
+#icons a:hover {
+    transform: scale(1.5);
+    transition: 0.1s;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+    padding: 2px 2px 2px 2px;
+  }
+
+.menu {
+    display: none;
+}
+
+@media all and (max-width: 1052px){
+    .titre {
+        flex-direction: column;
+        position: relative;
+        justify-content: space-between;
+    }
+    .menu {
+        display: block;
+        position: absolute;
+        right: 15px;
+        top: 15px;
+    }
+    .logo {
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+    .nav-list {
+        list-style-type: none;
+        width: 100%;
+        text-align: center;
+        padding-top: 10px;
+        display: none;
+    }
+    .nav-list .list-items {
+        display: block;
+        border-top: 1px solid white;
+    }
+    .active {
+        display: block;
+    }
+
+    
+        
+    .img1 {
+        
+            width: 100px;
+            height: 100px;
+            border: 5px solid darkblue;
+            border-radius: 100px 100px 100px 100px;
+            position: relative;
+            bottom: -100px;
+            left: 200px;
+            opacity: 1;
+        
+    }
+
+
+    .img3 {
+    width: 100px;
+    height: 80px;
+    border: 5px solid darkred;
+    border-radius: 98px 98px 98px 98px;
+    position:fixed;
+    bottom:95px;
+    right:15px;
+    opacity: 1;
+}
+
+    .img2 {
+    width: 100px;
+    height: 80px;
+    border: 5px solid darkgreen;
+    border-radius: 98px 98px 98px 98px;
+    position:fixed;
+    bottom:120px;
+    right:80px;
+    opacity: 1;
+}
+
+    .img7 {
+    width: 80px;
+    height: 60px;
+    border: 5px solid #77B5FE;
+    border-radius: 100px 100px 100px 100px;
+    position:fixed;
+    bottom:-100px;
+    left:165px;
+    opacity: 1;
+}
+    .img8 {
+    width: 50px;
+    height: 50px;
+    border: 5px solid green;
+    border-radius: 100px 100px 100px 100px;
+    position:fixed;
+    top:105px;
+    left:505px;
+    opacity: 1;
+}
+
+    .img9 {
+    width: 40px;
+    height: 40px;
+    border: 5px solid yellow;
+    border-radius: 100px 100px 100px 100px;
+    position:fixed;
+    top:100px;
+    left:640px;
+    opacity: 1;
+}
+
+
+    .img6 {
+    width: 80px;
+    height: 80px;
+    border: 5px solid red;
+    border-radius: 100px 100px 100px 100px;
+    position:fixed;
+    bottom:40px;
+    right:30px;
+    opacity: 1;
+}
+
+    .img5 {
+    width: 105px;
+    height: 105px;
+    border: 5px solid purple;
+    border-radius: 100px 100px 100px 100px;
+    opacity: 1;
+    right: 10px;
+}
+    .acceuil{
+    margin: 20px 0px 20px 0px;
+    width: auto;
+    flex-grow: 1;
+    flex-basis: 1;
+     
+}
+    .acceuil  h3 {
+        margin-left: 1px;
+        margin-bottom: 10px;
+        font-size: 13px;
+        color: black;
+      }
+    .estimer {
+        margin: 90px 10px 0px 70px;
+    }
+
+}

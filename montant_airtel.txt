@@ -1,0 +1,47 @@
+const expr = motant;
+switch (true) {
+  case (expr <= 1000):
+    const com = 50 ;
+    break;
+  case (expr > 1000 && expr <= 5000):
+    const com = 100 ;
+    break;
+  case (expr > 5000 && expr <= 10000):
+    const com = 100 ;
+    break;
+    
+  case (expr > 10000 && expr <= 20000):
+    const com = 200 ;
+    break;
+  
+  case (expr > 20000 && expr <= 30000):
+    const com = 300 ;
+    break;
+  
+  case (expr > 30000 && expr <= 40000):
+    const com = 400 ;
+    break;
+    
+  case (expr > 40000 && expr <= 60000):
+    const com = 600 ;
+    break;
+    
+  case (expr > 60000 && expr <= 100000):
+    const com = 800 ;
+    break;
+    
+  case (expr > 100000 && expr <= 500000):
+    const com = 1500 ;
+    break;
+    
+ case (expr > 500000 && expr <= 1000000):
+    const com = 2500 ;
+    break;
+    
+  case (expr > 1000000 && expr <= 2000000):
+    const com = 2500 ;
+    break;
+   
+  default:
+    alert("Veuillez entrer une somme inferieur à 2 millions");
+}

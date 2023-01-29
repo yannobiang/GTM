@@ -1,0 +1,112 @@
+
+{% extends 'file.html' %}        
+{% block ajouter %}
+
+
+<div class="total">
+<div class="contents">
+
+    <div id ="bubble">
+        <!-- le texte qui apparaitra dans la bulle -->
+            <span id="text">
+                <ul>
+                    <li style="color: black;">
+                        <em style="margin-left: 16px;">Car ils nous ont fait confiance</em>
+                    </li>
+                    <li style="color: black;">
+                        <em style="margin-left: 16px;">Votre transfert notre priorité</em>
+                    </li>
+                    <li style="color: black;">
+                        <em> Votre confiance notre efficacité</em>
+                    </li>
+                </ul>
+            </span>
+            <!-- 2 spans qui nous serviront à créer la flèche pointant vers notre personnage -->
+            <span id="arrow_inner"></span>
+    </div>
+    <div>
+        <img class="img1" src="{{ url_for('static', filename= 'images/Aby_seth.jpg')}}" alt="">
+        <img class="img2" src="{{ url_for('static', filename= 'images/ash.jpg')}}" alt="">
+        <img class="img3" src="{{ url_for('static', filename= 'images/del.jpg')}}" alt="">
+        <img class="img5" src="{{ url_for('static', filename= 'images/edengio.jpg')}}" alt="">
+        <img class="img6" src="{{ url_for('static', filename= 'images/mam.jpg')}}" alt="">
+        <img class="img7" src="{{ url_for('static', filename= 'images/maman.jpg')}}" alt="">
+        <img class="img8" src="{{ url_for('static', filename= 'images/mami.jpg')}}" alt="">
+        <img class="img9" src="{{ url_for('static', filename= 'images/papa.jpg')}}" alt="">
+    </div>
+    
+</div>
+<div class="paint">
+<!--<div class="paint">-->
+        <br>
+        <h4 id = "trans-title"></h4>
+
+        <div class = "acceuil">
+            <h3 style="margin-left: 45px;margin-bottom: 10px;color: black;">Estimation des frais</h3>
+
+                <br>
+                <br>
+
+                <select name="country" id="pays">
+                    <option name="country" value="">Choix du pays</option>
+                    <option name="country" value="france">🇫🇷&emsp;France</option>
+                    <option name="country" value="gabon">🇬🇦 &emsp;Gabon</option>
+                </select>
+
+
+                <input name="montant" class="btn-estimate" id ="montant" type="number" placeholder="montant">
+
+                <button class ="estimer">submit</button>
+        </div>
+        <form class ="result-estimer">
+            <br>
+            <table id="table-estimation" data-category=activity name = 'datatable'>
+
+            </table>
+
+            <br>
+            <fieldset>
+                <div class = "cont2">
+
+                    <label for="airtelmoney">
+                        Airtel-Money
+                    </label>
+                    <input type="radio" id="airtelmoney" name="choisir" value="artelmoney">
+                    <label for="main">
+                        Sans Airtel-Money
+                    </label>
+                    <input type="radio" id="main" name="choisir" value="sansairtel">
+                   
+                </div>
+                <div class = "cont2-ex">
+    
+                    <label for="paypal">
+                        Paypal
+                    </label>
+                    <input type="radio" id="paypal" name="choixTrans" value="paypal">
+                    <label for="carte">
+                        Carte visa
+                    </label>
+                    <input type="radio" id="visa" name="choixTrans" value="cartevisa">
+                    <label for="prendre">
+                        En main propre
+                    </label>
+                    <input type="radio" id="prendre" name="choixTrans" value="prendreargent">
+                </div>
+            </fieldset>
+            <br>
+
+            <div class = "cont3">
+                <button id="cancel">Précédent</button>
+                
+                <button id="suivant" onclick="post_estimate()">
+                        Suivant
+                </button>
+                
+            </div>
+        
+        </form> 
+<!--</div>-->
+</div> 
+</div>
+{% endblock %}

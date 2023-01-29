@@ -1,0 +1,106 @@
+
+<!--
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type= "text/css" href="{{ url_for('static',filename='styles.css') }}">
+</head>
+<body>
+    <main>
+
+   
+    <div class="wrapper hover_collapse">
+
+        -- Top bar 
+        <div class="top_navbar">
+            <- logo --
+                <div class="logo">Foolish Dev</div>
+            -- menu button --
+               <div class="menu">
+                 <div class="hamburger">
+                 <i class="fas fa-bars"></i>
+                 </div>
+               </div>
+            
+        </div>
+        
+        -- Sidebar --
+        <div class="sidebar">
+
+            <div class="sidebar_inner">
+                <ul>
+                    <li>
+                    <a href="{{ url_for('gabontransmoney') }}">
+                    <span class="icon"><i class="fa fa-qrcode"></i></span>
+                    <span class="text">Gabontransmoney</span>
+                    </a>
+                    </li>
+              
+                    <li>
+                        <a href="{{ url_for('nancyservices') }}">
+
+                  <span class="icon"><i class="fa fa-link"></i></span>
+                  <span class="text">La révédélices</span>
+                    </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('grille_cfa') }}">
+                  <span class="icon"><i class="fa fa-eye"></i></span>
+                  <span class="text">Grille tarifaire en Franc CFA</span>
+                    </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('grille_euro') }}">
+                  <span class="icon"><i class="fa fa-book"></i></span>
+                  <span class="text">Grille tarifaire en Euro</span>
+                    </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('support') }}">
+                  <span class="icon"><i class="fa fa-question-circle"></i></span>
+                  <span class="text">Contact support</span>
+                    </a>
+                    </li>
+                </ul>
+              </div>
+
+        </div>
+    </div>
+    </main>
+    <br>
+
+    <footer>
+        <h2 id="contact">Contacter-nous</h2>
+        <form>
+            <input placeholder="Nom">
+            <input placeholder="Email">
+            <textarea placeholder="Votre message ici ...."></textarea>
+            <button>Envoyer</button>
+        </form>
+        <div id="deuxiemeTrait"></div>
+        <div id="copyrightEtIcons">
+            <div id="copyright">
+                <span> © fromScratch(); 2023</span>
+            </div>
+            <div id="icons">
+                <a href="http://www.twitter.fr"><i class ="fab 
+                    fa-twitter"></i>
+                </a>
+
+                <a href="http://www.instagram.fr"><i class ="fab 
+                        fa-instagram"></i>
+                </a>
+
+                <a href="http://www.facebook.fr"><i class ="fab 
+                            fa-facebook"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script src="{{url_for('static', filename='js_style.js') }}"></script>
+</body>
+
+</html>
+-->

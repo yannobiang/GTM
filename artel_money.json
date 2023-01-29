@@ -1,0 +1,213 @@
+[
+  {
+    "montant": "300",
+    "frais de dépôt": "1 000",
+    "frais de transfert d'argent": "gratuit",
+    "frais de retrait": "50",
+    "banque": "50",
+    "paiement": "300",
+    "minimum": "150",
+    "maximum": "",
+    "a proximité": "175",
+    "a distance": "gratuit",
+    "vers les abonnés airtel money": " 100 "
+  },
+  {
+    "montant": "1 001",
+    "frais de dépôt": "5 000",
+    "frais de transfert d'argent": "50",
+    "frais de retrait": "50",
+    "banque": "700",
+    "paiement": "175",
+    "minimum": "",
+    "maximum": "175",
+    "a proximité": " 150 "
+  },
+  {
+    "montant": "5 001",
+    "frais de dépôt": "10 000",
+    "frais de transfert d'argent": "100",
+    "frais de retrait": "100",
+    "banque": "800",
+    "paiement": "350",
+    "minimum": "1 000",
+    "maximum": "480",
+    "a proximité": " 250 "
+  },
+  {
+    "montant": "10 001",
+    "frais de dépôt": "20 000",
+    "frais de transfert d'argent": "200",
+    "frais de retrait": "200",
+    "banque": "1 200",
+    "paiement": "700",
+    "minimum": "1 500",
+    "maximum": "650",
+    "a proximité": " 350 "
+  },
+  {
+    "montant": "20 001",
+    "frais de dépôt": "25 000",
+    "frais de transfert d'argent": "300",
+    "frais de retrait": "300",
+    "banque": "1 400",
+    "paiement": "700",
+    "minimum": "1 800",
+    "maximum": "700",
+    "a proximité": " 400 "
+  },
+  {
+    "montant": "25 001",
+    "frais de dépôt": "30 000",
+    "frais de transfert d'argent": "300",
+    "frais de retrait": "300",
+    "banque": "2 800",
+    "paiement": "1 500",
+    "minimum": "3 500",
+    "maximum": "700",
+    "a proximité": " 400 "
+  },
+  {
+    "montant": "30 001",
+    "frais de dépôt": "40 000",
+    "frais de transfert d'argent": "400",
+    "frais de retrait": "400",
+    "banque": "2 800",
+    "paiement": "1 500",
+    "minimum": "3 500",
+    "maximum": "1 400",
+    "a proximité": " 500 "
+  },
+  {
+    "montant": "40 001",
+    "frais de dépôt": "50 000",
+    "frais de transfert d'argent": "600",
+    "frais de retrait": "600",
+    "banque": "2 800",
+    "paiement": "1 500",
+    "minimum": "3 500",
+    "maximum": "1 550",
+    "a proximité": " 600 "
+  },
+  {
+    "montant": "50 001",
+    "frais de dépôt": "60 000",
+    "frais de transfert d'argent": "600",
+    "frais de retrait": "600",
+    "banque": "3 600",
+    "paiement": "2 000",
+    "minimum": "4 500",
+    "maximum": "1 550",
+    "a proximité": " 600 "
+  },
+  {
+    "montant": "60 001",
+    "frais de dépôt": "80 000",
+    "frais de transfert d'argent": "800",
+    "frais de retrait": "800",
+    "banque": "3 600",
+    "paiement": "2 000",
+    "minimum": "4 500",
+    "maximum": "2 000",
+    "a proximité": " 800 "
+  },
+  {
+    "montant": "80 001",
+    "frais de dépôt": "100 000",
+    "frais de transfert d'argent": "800",
+    "frais de retrait": "800",
+    "banque": "3 600",
+    "paiement": "2 000",
+    "minimum": "4 500",
+    "maximum": "2 400",
+    "a proximité": " 900 "
+  },
+  {
+    "montant": "100 001",
+    "frais de dépôt": "150 000",
+    "frais de transfert d'argent": "1 500",
+    "frais de retrait": "1 500",
+    "banque": "7 600",
+    "paiement": "3 500",
+    "minimum": "9 500",
+    "maximum": "3 100",
+    "a proximité": "1 500 "
+  },
+  {
+    "montant": "150 001",
+    "frais de dépôt": "250 000",
+    "frais de transfert d'argent": "1 500",
+    "frais de retrait": "1 500",
+    "banque": "7 600",
+    "paiement": "3 500",
+    "minimum": "9 500",
+    "maximum": "3 100",
+    "a proximité": " 1 500 "
+  },
+  {
+    "montant": "250 001",
+    "frais de dépôt": "500 000",
+    "frais de transfert d'argent": "1 500",
+    "frais de retrait": "1 500",
+    "banque": "10 000",
+    "paiement": "4 800",
+    "minimum": "12 500",
+    "maximum": "3 375",
+    "a proximité": " 2 000 "
+  },
+  {
+    "montant": "500 001",
+    "frais de dépôt": "1 000 000",
+    "frais de transfert d'argent": "2 500",
+    "frais de retrait": "2 500",
+    "banque": "13 600",
+    "paiement": "9 000",
+    "minimum": "17 000",
+    "maximum": "8 000",
+    "a proximité": "5 000 "
+  },
+  {
+    "montant": "1 000 001",
+    "frais de dépôt": "2 000 000",
+    "frais de transfert d'argent": "3 000",
+    "frais de retrait": "3 000",
+    "banque": "23 000",
+    "paiement": "15 000",
+    "minimum": "29 000",
+    "maximum": "17 000",
+    "a proximité": " 10 000 "
+  },
+  {
+    "montant": "2 000 001",
+    "frais de dépôt": "3 000 000",
+    "frais de transfert d'argent": "3 000",
+    "frais de retrait": "3 000",
+    "banque": "30 000",
+    "paiement": "20 000",
+    "minimum": "37 500",
+    "maximum": "19 500",
+    "a proximité": " 12 000 "
+  },
+  {
+    "montant": "3 000 001",
+    "frais de dépôt": "4 000 000",
+    "frais de transfert d'argent": "3 000",
+    "frais de retrait": "3 000",
+    "banque": "38 000",
+    "paiement": "25 000",
+    "minimum": "47 500",
+    "maximum": "24 000",
+    "a proximité": " 16 000 "
+  },
+  {
+    "montant": "4 000 001",
+    "frais de dépôt": "5 000 000",
+    "frais de transfert d'argent": "3 000",
+    "frais de retrait": "3 000",
+    "banque": "44 000",
+    "paiement": "30 000",
+    "minimum": "55 000",
+    "maximum": "25 000",
+    "a proximité": " 20 000"
+  }
+]

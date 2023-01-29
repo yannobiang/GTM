@@ -1,0 +1,38 @@
+
+{% extends 'file.html' %}        
+{% block ajouter %}
+
+<table>
+    {% for key, value in dict_table.items() %}
+   
+    <thead>
+        <th>{{key}}</th>
+    </thead>
+    <td>
+        {value}
+    </td>
+    {% endfor %}
+    <tr>
+    <td>
+   
+    <form method="post">
+    <!--
+    <script src="https://checkout.stripe.com/checkout.js" 
+            class="stripe-button"
+            data-key="{{ key }}"
+            data-name="Gabontransmoney"
+            data-description="transfert d'argent en securité"
+            data-amount="{{montantTransfere}}"
+            data-locale="auto"
+            data-currency = "EUR">
+    </script>
+-->
+    {{max_valu}}
+</td>
+</form>
+</tr>
+</table>
+
+
+
+{% endblock %}
