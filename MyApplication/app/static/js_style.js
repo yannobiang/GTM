@@ -65,8 +65,7 @@ function post_estimate() {
   var leChoix = getButRadio();
   var montantPay = montantant_pays();
   $.ajax({
-    type: "GET",
-    url: "",
+    type: "POST",
     data: JSON.stringify({
       checkchoose: leChoix,
       montantPays: montantPay,
