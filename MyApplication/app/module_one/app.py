@@ -22,6 +22,7 @@ from flask_mail import (Mail, Message)
 import stripe
 
 
+baseurl=os.getcwd()
 
 template_dir = '/home/princeobiang/nancy_creation/MyApplication/app/templates/'
 static_dir = '/home/princeobiang/nancy_creation/MyApplication/app/static/'
@@ -48,9 +49,11 @@ def home():
     
     url_image =  'new_logo.jpg' #static_dir
     title = "Gabontransmoney"
+
     if request.method == "POST":
-        data = json.dumps(request.args)
-        
+        data = json.dumps(request.form)
+        print(data)
+        return ('25')
         if data is not None :
         #dict_file = data.getlist("montPays")
             popo = json.loads(data).keys()
@@ -78,7 +81,7 @@ def gabontransmoney():
     
 # Ajout de la partie trouvée sur internet ici 
 
-@app.route('/confirmation de choix', methods=['GET','POST'])
+@app.route('/confirmation_de_choix', methods=['GET','POST'])
 def confirmation():
     dict_table = {"popo": "france",
                   "montant": 212
@@ -88,7 +91,7 @@ def confirmation():
     #max_valu = float(os.environ['max_valu'])
     
     data = request.args
-    print(data)
+    print(request.args)
     return render_template('module_one/confirmation.html',
                             dict_table = dict_table,
                             max_valu = max_valu,

@@ -16,7 +16,7 @@ const cancel = document.getElementById("cancel");
 const image1 = document.querySelector(".img1");
 const image2 = document.querySelector(".img2");
 const image3 = document.querySelector(".img3");
-const image5 = document.querySelector(".img5");
+const image5 = document.querySelector(".image5");
 const image7 = document.querySelector(".img7");
 const image8 = document.querySelector(".img8");
 const image6 = document.querySelector(".img6");
@@ -66,12 +66,15 @@ function post_estimate() {
   var montantPay = montantant_pays();
   $.ajax({
     type: "POST",
-    data: JSON.stringify({
-      checkchoose: leChoix,
-      montantPays: montantPay,
-    }),
+    data: {
+      montant: montantPay.montant,
+      pays: montantPay.country,
+      choix: leChoix.choisir,
+      transfert: leChoix.choixTrans,
+    },
     //dataType: "json",
-    contentType: "application/json;charset=UTF-8",
+  }).done(function(data) {
+    window.location.href = "/confirmation_de_choix?montant=" + data;
   });
 }
 
@@ -106,21 +109,25 @@ function generateTable(table, data) {
 
 // Function to start setInterval call
 function start() {
-  intervalID = setInterval(function () {
+  intervalID = setInterval(function() {
     var images = $("img");
     var min = 1;
     var max = images.length;
     var random = Math.floor(Math.random() * (max - min)) + min;
 
     for (let i = random; i < max; i++) {
-      images[i].style.display = "none";
-      images[i].style.transition = "5s";
+      if (images[i].classList[0].includes("img")) {
+        images[i].style.display = "none";
+        images[i].style.transition = "5s";
+      }
       //images[random + 1].style.display = "none";
       //images[max].style.display = "none";
     }
     for (let j = 1; j <= random; j++) {
-      images[j].style.display = "block";
-      images[j].style.transition = "5s";
+      if (images[j].classList[0].includes("img")) {
+        images[j].style.display = "block";
+        images[j].style.transition = "5s";
+      }
       //images[random + 1].style.display = "block";
       //images[max].style.display = "block";
     }
@@ -443,7 +450,7 @@ if (send_button != null) {
         );
         mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
         letitre.innerHTML =
-          "Trandfert de La France vers Le " +
+          "Transfert de La France vers Le " +
           pays +
           " de " +
           expr +
@@ -457,7 +464,7 @@ if (send_button != null) {
               eval(airtelSansFrais / euro)
             ).toFixed(2),
             "Total-commission en CFA": eval(com2),
-            "Tatal-commission en €": Math.round(eval(com2) / euro).toFixed(2),
+            "Total-commission en €": Math.round(eval(com2) / euro).toFixed(2),
           },
 
           {
@@ -476,7 +483,7 @@ if (send_button != null) {
             Type: "Récuperer en main",
             "Montant-TTC en CFA": mainPropre,
             "Montant-TTC en €": Math.round(eval(mainPropre) / euro).toFixed(2),
-            "Tatal-commission en CFA": eval(com2),
+            "Total-commission en CFA": eval(com2),
             "Total-commission en €": Math.round(eval(com2) / euro).toFixed(2),
           },
         ];
@@ -615,7 +622,7 @@ if (send_button != null) {
         mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
 
         letitre.innerHTML =
-          "Trandfert du Gabon vers La " + pays + " de " + expr + " €";
+          "Transfert du Gabon vers La " + pays + " de " + expr + " €";
 
         let informations = [
           {
@@ -625,7 +632,7 @@ if (send_button != null) {
               eval(airtelSansFrais * euro)
             ).toFixed(2),
             "Total-commission en €": eval(com2),
-            "Tatal-commission en CFA": Math.round(eval(com2) * euro).toFixed(2),
+            "Total-commission en CFA": Math.round(eval(com2) * euro).toFixed(2),
           },
 
           {
@@ -646,7 +653,7 @@ if (send_button != null) {
             "Montant-TTC en CFA": Math.round(eval(mainPropre) * euro).toFixed(
               2
             ),
-            "Tatal-commission en €": eval(com2),
+            "Total-commission en €": eval(com2),
             "Total-commission en CFA": Math.round(eval(com2) * euro).toFixed(2),
           },
         ];
