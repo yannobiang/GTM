@@ -262,7 +262,7 @@ li {
   flex-direction: column;
   justify-content: flex-between;
   width: 200px;
-  height: 310px;
+  height: 340px;
   margin: 20px 20px 20px 80px;
   background-color: white;
 }
@@ -554,7 +554,34 @@ form {
   display: none;
 }
 
-@media all and (max-width: 1052px) {
+
+@media (max-width: 1688px) and (min-width: 770px) {
+
+    .acceuil {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-between;
+        width: 160px;
+        height: 340px;
+        margin: 20px 20px 20px 80px;
+        background-color: white;
+      }
+
+    .contents {
+        display: flex;
+        flex-direction: column;
+        width: 65%;
+        flex-grow: 2;
+        background-image: url(images/made.jpg);
+        background-repeat: no-repeat;
+        background-position-x: right;
+        background-size: 550px;
+    }
+}
+
+
+
+@media (max-width: 768px) {
   .titre {
     flex-direction: column;
     position: relative;
@@ -684,4 +711,39 @@ form {
   .estimer {
     margin: 90px 10px 0px 70px;
   }
+}
+
+#visacarte th, td {
+    border: 2px solid; 
+    width: 800px;
+    background-color: #f5f5f5;
+    
+}
+
+@media (max-width: 390px) {
+
+    .acceuil {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-between;
+        width: 160px;
+        height: 340px;
+        margin: 20px 20px 20px 80px;
+        background-color: white;
+      }
+
+    .contents {
+        display: flex;
+        flex-direction: column;
+        width: 65%;
+        flex-grow: 2;
+        background-image: url(images/made.jpg);
+        background-repeat: no-repeat;
+        background-position-x: right;
+        background-size: 550px;
+    }
+    .img1, .img2, .img3, .image5, .img6,
+    .img7, .img8, .img9 {
+        display: none;
+    }
 }
