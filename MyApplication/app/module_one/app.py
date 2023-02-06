@@ -106,8 +106,11 @@ def confirmation():
 
 
 
-@app.route('/charge', methods=['GET','POST'])
+@app.route('/charge', methods=['POST'])
 def charge():
+
+    data = request.form
+    print(data)
     # Amount in cents
     amount = 500
 
@@ -122,14 +125,14 @@ def charge():
         currency='eur',
         description='Flask Charge'
     )
-    if request.method == 'POST':
+    #if request.method == 'POST':
         
-        msg = Message('Bonjour cher', sender = 'yannobiang3@gmail.com', recipients = ['enguienancy@gmail.com',
-        'bermudezjoseline00@gmail.com'])
-        msg.body = "Hey Paul, sending you this email from my Flask app, lmk if it works"
-        mail.send(msg)
-        return "sent email"
-    return render_template('charge.html', amount=amount)
+    msg = Message('Bonjour cher', sender = 'yannobiang3@gmail.com', recipients = ['enguienancy@gmail.com',
+    'florentchauvet22@gmail.com'])
+    msg.body = "Hey Paul, sending you this email from my Flask app, lmk if it works"
+    mail.send(msg)
+        #return "sent email"
+    return render_template('payements/succes.html', amount=amount)
 
 # fin de la partie trouvé sur internet ici.
 

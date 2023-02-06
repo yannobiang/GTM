@@ -24,15 +24,22 @@
             </td>
    
     <tr>
-        <form method="post">
+        <form action="/charge" method="POST">
+            <div style="display: flex; align-items: center; flex-direction: column;
+            ">
+                <h2>Client email :</h2>
+                <input type="email">
+            </div>
+            <br>
+            <br>
             <script src="https://checkout.stripe.com/checkout.js" 
                     class="stripe-button"
                     data-key="{{ key }}"
                     data-name="Gabontransmoney"
                     data-description="transfert d'argent en securité"
-                    data-amount="{{montantTransfere}}"
+                    data-amount="{{max_valu * 100}}"
                     data-locale="auto"
-                    data-currency = "EUR">
+                    data-currency = "eur">
             </script>
         </form>
     </tr>
@@ -42,6 +49,5 @@
 <br>
 <br>
 <br>
-
 
 {% endblock %}
