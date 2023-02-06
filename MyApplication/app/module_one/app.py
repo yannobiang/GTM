@@ -110,9 +110,9 @@ def confirmation():
 def charge():
 
     data = request.form
-    print(data)
+    print(request.args)
     # Amount in cents
-    amount = 1400
+    amount = request.args.get('ammount')
 
     customer = stripe.Customer.create(
         email='bermudezjoseline00@gmail.com',
@@ -127,10 +127,10 @@ def charge():
     )
     #if request.method == 'POST':
         
-    msg = Message('Bonjour cher', sender = 'yannobiang3@gmail.com', recipients = ['enguienancy@gmail.com',
-    'florentchauvet22@gmail.com'])
-    msg.body = "Hey Paul, sending you this email from my Flask app, lmk if it works"
-    mail.send(msg)
+    # msg = Message('Bonjour cher', sender = 'yannobiang3@gmail.com', recipients = ['enguienancy@gmail.com',
+    # 'florentchauvet22@gmail.com'])
+    # msg.body = "Hey Paul, sending you this email from my Flask app, lmk if it works"
+    # mail.send(msg)
         #return "sent email"
     return render_template('payements/succes.html', amount=amount)
 

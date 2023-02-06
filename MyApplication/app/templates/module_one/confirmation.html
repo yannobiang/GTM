@@ -5,7 +5,7 @@
 <br>
 <br>
 <br>
-<form action="/charge" method="POST">
+<form action="/charge?ammount={{max_valu*100}}" method="POST">
 
 <table id="visacarte">
 
@@ -20,8 +20,7 @@
     {% endfor %}
     <tr>
         <th>Valeur du transfert TTC</th>
-        <td><input value="{{max_valu}}">
-            {{max_valu}}
+        <td><input name="ammount_money" value="{{max_valu}}">
             </td>
    
     <tr>
@@ -34,9 +33,12 @@
             <br>
             <script src="https://checkout.stripe.com/checkout.js" 
                     class="stripe-button"
+                    data-name="Gabontransmoney"
+                    data-description="Transfert d'argent tout le temps et en toute securite"
                     data-key="{{ key }}"
                     data-amount="{{max_valu * 100}}"
                     data-locale="auto"
+                    data-currency="eur"
                     >
             </script>
 

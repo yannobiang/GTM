@@ -489,6 +489,12 @@ table {
   margin: 2px 25px 1px -50px;
 }
 
+#visacarte th, td {
+  border: 2px solid; 
+  width: 800px;
+  background-color: #f5f5f5;
+  
+}
 .icone > #transf {
   margin: 2px 22px 1px -68px;
 }
@@ -555,7 +561,7 @@ form {
 }
 
 
-@media (max-width: 1920px) and (min-width: 770px) {
+@media (max-width: 1920px) and (min-width: 1200px) {
 
     .acceuil {
         display: flex;
@@ -581,21 +587,21 @@ form {
 
 
 
-@media (max-width: 768px) and (min-width:390px) {
-  .titre {
+@media (max-width: 920px) and (min-width:390px) {
+
+  .contents {
+    display: flex;
     flex-direction: column;
-    position: relative;
-    justify-content: space-between;
-  }
-  .menu {
-    display: block;
-    position: absolute;
-    right: 15px;
-    top: 15px;
-  }
+    width: 65%;
+    flex-grow: 2;
+    background-image: url(images/made.jpg);
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-size: 530px;
+}
   .logo {
     margin-top: 10px;
-    margin-left: 10px;
+    margin-left: 2px;
   }
   .nav-list {
     list-style-type: none;
@@ -711,13 +717,6 @@ form {
   .estimer {
     margin: 90px 10px 0px 70px;
   }
-}
-
-#visacarte th, td {
-    border: 2px solid; 
-    width: 800px;
-    background-color: #f5f5f5;
-    
 }
 
 @media (max-width: 390px) {
