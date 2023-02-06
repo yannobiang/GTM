@@ -634,21 +634,22 @@ form {
     height: 80px;
     border: 5px solid darkred;
     border-radius: 98px 98px 98px 98px;
-    position: absolute;
-    bottom: 95px;
-    right: 15px;
-    opacity: 1;
+    position: relative;
+    bottom: -512px;
+    left: 45%;
+    top: unset;
   }
 
   .img2 {
     width: 100px;
     height: 80px;
     border: 5px solid darkgreen;
-    border-radius: 98px 98px 98px 98px;
+    border-radius: 100px 100px 100px 100px;
     position: absolute;
-    bottom: 120px;
+    bottom: -512px;
     right: 80px;
     opacity: 1;
+    top: unset;
   }
 
   .img7 {
@@ -694,14 +695,15 @@ form {
     opacity: 1;
   }
 
-  .img5 {
-    width: 105px;
-    height: 105px;
+  .image5 {
+    width: 210px;
+    height: 210px;
     border: 5px solid purple;
-    border-radius: 100px 100px 100px 100px;
-    opacity: 1;
-    right: 10px;
-  }
+    bottom: -800px;
+    position: relative;
+}
+
+
   .acceuil {
     margin: 20px 0px 20px 0px;
     width: auto;
@@ -745,4 +747,14 @@ form {
     .img7, .img8, .img9 {
         display: none;
     }
+}
+
+@media (min-height : 1180px){
+
+  .total {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 100vh;
+  }
+
 }
