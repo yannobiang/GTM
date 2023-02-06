@@ -112,7 +112,7 @@ def charge():
     data = request.form
     print(data)
     # Amount in cents
-    amount = 500
+    amount = 1400
 
     customer = stripe.Customer.create(
         email='bermudezjoseline00@gmail.com',

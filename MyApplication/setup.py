@@ -10,7 +10,7 @@ from flask_mail import (Mail, Message)
 import os
 import stripe
 
-app = Flask(__name__, template_folder = '/home/princeobiang/nancy_projet/nancy_creation/MyApplication/test'
+app = Flask(__name__, template_folder = 'C://Users//Projet//GTM//MyApplication//app//templates//'
                      )
 
 app.config['STRIPE_PUBLIC_KEY'] = 'pk_test_51ML83GGkR2DegpH1QL2mvNrUnTXdjKPTKagEgGMyI81TwUFs3n9LkmGSuk63BOiMr87HxKVPtZqdqtwhr5UwSEwC00BODG8H5b'
@@ -30,12 +30,12 @@ stripe.api_key = app.config['STRIPE_SECRET_KEY']
 
 @app.route('/')
 def index():
-    return render_template('index.html', key=app.config['STRIPE_PUBLIC_KEY'])
+    return render_template('test_stripe.html', key=app.config['STRIPE_PUBLIC_KEY'])
 
 @app.route('/charge', methods=['POST'])
 def charge():
     # Amount in cents
-    amount = 500
+    amount = 800
 
     customer = stripe.Customer.create(
         email='bermudezjoseline00@gmail.com',
