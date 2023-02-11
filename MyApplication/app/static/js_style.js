@@ -66,15 +66,13 @@ function post_estimate() {
   var montantPay = montantant_pays();
   $.ajax({
     type: "POST",
-    data: {
-      montant: montantPay.montant,
-      pays: montantPay.country,
-      choix: leChoix.choisir,
-      transfert: leChoix.choixTrans,
-    },
+    url: "",
+    data: JSON.stringify({
+      checkchoose: leChoix,
+      montantPays: montantPay,
+    }),
     //dataType: "json",
-  }).done(function(data) {
-    window.location.href = "/confirmation_de_choix?montant=" + data;
+    contentType: "application/json;charset=UTF-8",
   });
 }
 
@@ -109,25 +107,21 @@ function generateTable(table, data) {
 
 // Function to start setInterval call
 function start() {
-  intervalID = setInterval(function() {
+  intervalID = setInterval(function () {
     var images = $("img");
     var min = 1;
     var max = images.length;
     var random = Math.floor(Math.random() * (max - min)) + min;
 
     for (let i = random; i < max; i++) {
-      if (images[i].classList[0].includes("img")) {
-        images[i].style.display = "none";
-        images[i].style.transition = "5s";
-      }
+      images[i].style.display = "none";
+      images[i].style.transition = "5s";
       //images[random + 1].style.display = "none";
       //images[max].style.display = "none";
     }
     for (let j = 1; j <= random; j++) {
-      if (images[j].classList[0].includes("img")) {
-        images[j].style.display = "block";
-        images[j].style.transition = "5s";
-      }
+      images[j].style.display = "block";
+      images[j].style.transition = "5s";
       //images[random + 1].style.display = "block";
       //images[max].style.display = "block";
     }
@@ -450,7 +444,7 @@ if (send_button != null) {
         );
         mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
         letitre.innerHTML =
-          "Transfert de La France vers Le " +
+          "Trandfert de La France vers Le " +
           pays +
           " de " +
           expr +
@@ -464,7 +458,7 @@ if (send_button != null) {
               eval(airtelSansFrais / euro)
             ).toFixed(2),
             "Total-commission en CFA": eval(com2),
-            "Total-commission en €": Math.round(eval(com2) / euro).toFixed(2),
+            "Tatal-commission en €": Math.round(eval(com2) / euro).toFixed(2),
           },
 
           {
@@ -483,7 +477,7 @@ if (send_button != null) {
             Type: "Récuperer en main",
             "Montant-TTC en CFA": mainPropre,
             "Montant-TTC en €": Math.round(eval(mainPropre) / euro).toFixed(2),
-            "Total-commission en CFA": eval(com2),
+            "Tatal-commission en CFA": eval(com2),
             "Total-commission en €": Math.round(eval(com2) / euro).toFixed(2),
           },
         ];
@@ -557,58 +551,15 @@ if (send_button != null) {
 
         /* ici le cas de la deuxieme commission */
         switch (true) {
-          case eval(expr) <= Math.round(eval(60000 / euro)).toFixed(2):
-            com2 = Math.round(500 / euro).toFixed(2);
+          case eval(expr) <= 9.14:
+            com2 = Math.round(eval(500 / euro + 0.5)).toFixed(2);
 
             break;
-          case eval(expr) > Math.round(60000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(90000 / euro).toFixed(2):
-            com2 = Math.round(700 / euro).toFixed(2);
+          case eval(expr) > 9.14:
+            com2 = Math.round(
+              (eval(expr) / 4.57) * eval(45 / euro) + eval(500 / euro) + 0.5
+            ).toFixed(2);
 
-            break;
-          case eval(expr) > Math.round(90000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(120000 / euro).toFixed(2):
-            com2 = Math.round(900 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(120000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(150000 / euro).toFixed(2):
-            com2 = Math.round(1100 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(150000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(300000 / euro).toFixed(2):
-            com2 = Math.round(1300 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(300000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(400000 / euro).toFixed(2):
-            com2 = Math.round(1500 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(400000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(600000 / euro).toFixed(2):
-            com2 = Math.round(1900 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(600000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(1000000 / euro).toFixed(2):
-            com2 = Math.round(2300 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(1000000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(1500000 / euro).toFixed(2):
-            com2 = Math.round(2700 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(1500000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(2000000 / euro).toFixed(2):
-            com2 = Math.round(3100 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(2000000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(3000000 / euro).toFixed(2):
-            com2 = Math.round(3500 / euro).toFixed(2);
             break;
 
           default:
@@ -622,7 +573,7 @@ if (send_button != null) {
         mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
 
         letitre.innerHTML =
-          "Transfert du Gabon vers La " + pays + " de " + expr + " €";
+          "Trandfert du Gabon vers La " + pays + " de " + expr + " €";
 
         let informations = [
           {
@@ -632,7 +583,7 @@ if (send_button != null) {
               eval(airtelSansFrais * euro)
             ).toFixed(2),
             "Total-commission en €": eval(com2),
-            "Total-commission en CFA": Math.round(eval(com2) * euro).toFixed(2),
+            "Tatal-commission en CFA": Math.round(eval(com2) * euro).toFixed(2),
           },
 
           {
@@ -653,7 +604,7 @@ if (send_button != null) {
             "Montant-TTC en CFA": Math.round(eval(mainPropre) * euro).toFixed(
               2
             ),
-            "Total-commission en €": eval(com2),
+            "Tatal-commission en €": eval(com2),
             "Total-commission en CFA": Math.round(eval(com2) * euro).toFixed(2),
           },
         ];

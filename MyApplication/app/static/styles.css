@@ -554,6 +554,34 @@ form {
   display: none;
 }
 
+@media all and (max-height: 390px) {
+  .total {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 100vh;
+  }
+
+}
+
+@media all and (max-height: 768px) {
+  .total {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 100vh;
+  }
+
+}
+
+@media all and (max-height: 1440px) {
+  .total {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 100vh;
+  }
+
+}
+
+/*
 @media all and (max-width: 1052px) {
   .titre {
     flex-direction: column;

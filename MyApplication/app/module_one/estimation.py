@@ -74,9 +74,9 @@ class Estimation():
             
         elif self.pays == 'france':
             if self.montant > 0 and self.montant <= 9.14 :
-                comTrans = (500/self.euro)
+                comTrans = (500/self.euro) + 0.5
             elif self.montant > 9.14:
-                comTrans =  round(((self.montant /4.57) * (45/self.euro)) + (500/self.euro),2)
+                comTrans =  round(((self.montant /4.57) * (45/self.euro)) + (500/self.euro),2) + 0.5
        
         return comTrans
 

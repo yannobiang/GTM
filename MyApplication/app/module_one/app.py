@@ -129,13 +129,15 @@ def charge():
 @app.route('/nancyservices/', methods=['GET', 'POST'])
 def nancyservices():
 
-    
-    title = "La révédélice"
+    url_image = 'logo_revedelice.png'
+    title = ""
     if request.method == "POST":
         data = request.form
         print(data)
         
-    return render_template('module_two/index.html', title = title)
+    return render_template('module_two/index.html',
+                            url_image = url_image
+                             )
 
 
 @app.route('/tarifs en Euro/', methods=['GET', 'POST'])
