@@ -161,7 +161,7 @@ if (cancel != null) {
     image8.style.display = "block";
     image6.style.display = "block";
     image9.style.display = "block";
-    start();
+    //start();
   });
 }
 
@@ -190,7 +190,7 @@ if (acceuil.style.display != "none") {
 }
 */
 if (send_button != null) {
-  start();
+ // start();
   send_button.addEventListener("click", () => {
     const pays = document.getElementById("pays").value;
     const expr = document.getElementById("montant").value;

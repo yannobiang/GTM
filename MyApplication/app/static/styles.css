@@ -262,7 +262,7 @@ li {
   flex-direction: column;
   justify-content: flex-between;
   width: 200px;
-  height: 310px;
+  height: 340px;
   margin: 20px 20px 20px 80px;
   background-color: white;
 }
@@ -489,6 +489,12 @@ table {
   margin: 2px 25px 1px -50px;
 }
 
+#visacarte th, td {
+  border: 2px solid; 
+  width: 800px;
+  background-color: #f5f5f5;
+  
+}
 .icone > #transf {
   margin: 2px 22px 1px -68px;
 }
@@ -554,6 +560,7 @@ form {
   display: none;
 }
 
+<<<<<<< HEAD
 @media all and (max-height: 390px) {
   .total {
     display: flex;
@@ -584,19 +591,50 @@ form {
 /*
 @media all and (max-width: 1052px) {
   .titre {
+=======
+
+@media (max-width: 1920px) and (min-width: 1200px) {
+
+    .acceuil {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-between;
+        width: 160px;
+        height: 340px;
+        margin: 20px 20px 20px 80px;
+        background-color: white;
+      }
+
+    .contents {
+        display: flex;
+        flex-direction: column;
+        width: 65%;
+        flex-grow: 2;
+        background-image: url(images/made.jpg);
+        background-repeat: no-repeat;
+        background-position-x: right;
+        background-size: 550px;
+    }
+}
+
+
+
+@media (max-width: 920px) and (min-width:390px) {
+
+  .contents {
+    display: flex;
+>>>>>>> a5f7650d8f480d1c8c7bf889cd703e3de10dbdb0
     flex-direction: column;
-    position: relative;
-    justify-content: space-between;
-  }
-  .menu {
-    display: block;
-    position: absolute;
-    right: 15px;
-    top: 15px;
-  }
+    width: 65%;
+    flex-grow: 2;
+    background-image: url(images/made.jpg);
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-size: 530px;
+}
   .logo {
     margin-top: 10px;
-    margin-left: 10px;
+    margin-left: 2px;
   }
   .nav-list {
     list-style-type: none;
@@ -629,21 +667,22 @@ form {
     height: 80px;
     border: 5px solid darkred;
     border-radius: 98px 98px 98px 98px;
-    position: absolute;
-    bottom: 95px;
-    right: 15px;
-    opacity: 1;
+    position: relative;
+    bottom: -512px;
+    left: 45%;
+    top: unset;
   }
 
   .img2 {
     width: 100px;
     height: 80px;
     border: 5px solid darkgreen;
-    border-radius: 98px 98px 98px 98px;
+    border-radius: 100px 100px 100px 100px;
     position: absolute;
-    bottom: 120px;
+    bottom: -512px;
     right: 80px;
     opacity: 1;
+    top: unset;
   }
 
   .img7 {
@@ -689,14 +728,15 @@ form {
     opacity: 1;
   }
 
-  .img5 {
-    width: 105px;
-    height: 105px;
+  .image5 {
+    width: 210px;
+    height: 210px;
     border: 5px solid purple;
-    border-radius: 100px 100px 100px 100px;
-    opacity: 1;
-    right: 10px;
-  }
+    bottom: -800px;
+    position: relative;
+}
+
+
   .acceuil {
     margin: 20px 0px 20px 0px;
     width: auto;
@@ -712,4 +752,42 @@ form {
   .estimer {
     margin: 90px 10px 0px 70px;
   }
+}
+
+@media (max-width: 390px) {
+
+    .acceuil {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-between;
+        width: 160px;
+        height: 340px;
+        margin: 20px 20px 20px 80px;
+        background-color: white;
+      }
+
+    .contents {
+        display: flex;
+        flex-direction: column;
+        width: 65%;
+        flex-grow: 2;
+        background-image: url(images/made.jpg);
+        background-repeat: no-repeat;
+        background-position-x: right;
+        background-size: 550px;
+    }
+    .img1, .img2, .img3, .image5, .img6,
+    .img7, .img8, .img9 {
+        display: none;
+    }
+}
+
+@media (min-height : 1180px){
+
+  .total {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 100vh;
+  }
+
 }

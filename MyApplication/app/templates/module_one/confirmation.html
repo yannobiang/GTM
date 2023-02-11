@@ -1,38 +1,53 @@
 
 {% extends 'file.html' %}        
 {% block ajouter %}
+<br>
+<br>
+<br>
+<br>
+<form action="/charge?ammount={{max_valu*100}}" method="POST">
 
-<table>
-    {% for key, value in dict_table.items() %}
-   
-    <thead>
-        <th>{{key}}</th>
-    </thead>
-    <td>
-        {value}
-    </td>
+<table id="visacarte">
+
+        {% for key, value in data.items() %}
+            <tr>
+                <th>{{key}}</th>
+                
+                <td>
+                    {{value}}
+                </td>
+            </tr>
     {% endfor %}
     <tr>
-    <td>
+        <th>Valeur du transfert TTC</th>
+        <td><input name="ammount_money" value="{{max_valu}}">
+            </td>
    
-    <form method="post">
-    <!--
-    <script src="https://checkout.stripe.com/checkout.js" 
-            class="stripe-button"
-            data-key="{{ key }}"
-            data-name="Gabontransmoney"
-            data-description="transfert d'argent en securité"
-            data-amount="{{montantTransfere}}"
-            data-locale="auto"
-            data-currency = "EUR">
-    </script>
--->
-    {{max_valu}}
-</td>
-</form>
-</tr>
+    <tr>
+            <div style="display: flex; align-items: center; flex-direction: column;
+            ">
+                <h2>Client email :</h2>
+                <input type="email">
+            </div>
+            <br>
+            <br>
+            <script src="https://checkout.stripe.com/checkout.js" 
+                    class="stripe-button"
+                    data-name="Gabontransmoney"
+                    data-description="Transfert d'argent tout le temps et en toute securite"
+                    data-key="{{ key }}"
+                    data-amount="{{max_valu * 100}}"
+                    data-locale="auto"
+                    data-currency="eur"
+                    >
+            </script>
+
+    </tr>
 </table>
-
-
+        </form>
+<br>
+<br>
+<br>
+<br>
 
 {% endblock %}

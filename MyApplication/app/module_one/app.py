@@ -24,9 +24,13 @@ import stripe
 
 baseurl=os.getcwd()
 
-template_dir = '/home/princeobiang/nancy_creation/MyApplication/app/templates/'
-static_dir = '/home/princeobiang/nancy_creation/MyApplication/app/static/'
-images = '/home/princeobiang/nancy_creation/MyApplication/app/images/'
+# template_dir = '/home/princeobiang/nancy_creation/MyApplication/app/templates/'
+# static_dir = '/home/princeobiang/nancy_creation/MyApplication/app/static/'
+# images = '/home/princeobiang/nancy_creation/MyApplication/app/static/images/'
+
+template_dir = 'C://Users//Projet//GTM//MyApplication//app//templates//'
+static_dir = 'C://Users//Projet//GTM//MyApplication//app//static//'
+images = 'C://Users//Projet//GTM/MyApplication//app//static//images//'
 
 app = Flask(__name__, template_folder = template_dir,  static_folder=static_dir
                         )
@@ -51,13 +55,11 @@ def home():
     title = "Gabontransmoney"
 
     if request.method == "POST":
-        data = json.dumps(request.form)
-        print(data)
-        return ('25')
-        if data is not None :
-        #dict_file = data.getlist("montPays")
-            popo = json.loads(data).keys()
-            popo_list = list(popo)
+        data = request.form.to_dict(flat= True)
+        #data = request.get_json()
+        
+        max_valu = 213
+        return json.dumps(data)
             #print(popo_list[0])
         #return redirect(url_for('confirmation'))
         
@@ -83,26 +85,34 @@ def gabontransmoney():
 
 @app.route('/confirmation_de_choix', methods=['GET','POST'])
 def confirmation():
+
+ 
+    
     dict_table = {"popo": "france",
                   "montant": 212
                   }
     max_valu = 254
+    url_image =  'new_logo.jpg'
     #dict_table = dict(json.loads(os.environ['table']))
     #max_valu = float(os.environ['max_valu'])
     
-    data = request.args
-    print(request.args)
+    data = json.loads(request.args.get('montant'))
+    print(dict(data))
     return render_template('module_one/confirmation.html',
-                            dict_table = dict_table,
+                            data = data,
                             max_valu = max_valu,
+                            url_image = url_image,
                             key=app.config['STRIPE_PUBLIC_KEY'])
 
 
 
-@app.route('/charge', methods=['GET','POST'])
+@app.route('/charge', methods=['POST'])
 def charge():
+
+    data = request.form
+    print(request.args)
     # Amount in cents
-    amount = 500
+    amount = request.args.get('ammount')
 
     customer = stripe.Customer.create(
         email='bermudezjoseline00@gmail.com',
@@ -115,14 +125,14 @@ def charge():
         currency='eur',
         description='Flask Charge'
     )
-    if request.method == 'POST':
+    #if request.method == 'POST':
         
-        msg = Message('Bonjour cher', sender = 'yannobiang3@gmail.com', recipients = ['enguienancy@gmail.com',
-        'bermudezjoseline00@gmail.com'])
-        msg.body = "Hey Paul, sending you this email from my Flask app, lmk if it works"
-        mail.send(msg)
-        return "sent email"
-    return render_template('charge.html', amount=amount)
+    # msg = Message('Bonjour cher', sender = 'yannobiang3@gmail.com', recipients = ['enguienancy@gmail.com',
+    # 'florentchauvet22@gmail.com'])
+    # msg.body = "Hey Paul, sending you this email from my Flask app, lmk if it works"
+    # mail.send(msg)
+        #return "sent email"
+    return render_template('payements/succes.html', amount=amount)
 
 # fin de la partie trouvé sur internet ici.
 
