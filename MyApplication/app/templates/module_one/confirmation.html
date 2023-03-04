@@ -21,19 +21,18 @@
     <tr>
         <th>Valeur du transfert TTC</th>
         <td><input name="ammount_money" value="{{max_valu}}">
-            </td>
-   
+        </td>
+    </tr>
     <tr>
             <div style="display: flex; align-items: center; flex-direction: column;
-            ">
-                <h2>Client email :</h2>
-                <input type="email">
+            ">   
             </div>
             <br>
             <br>
             <script src="https://checkout.stripe.com/checkout.js" 
                     class="stripe-button"
                     data-name="Gabontransmoney"
+                    data-email="{{ email }}"
                     data-description="Transfert d'argent tout le temps et en toute securite"
                     data-key="{{ key }}"
                     data-amount="{{max_valu * 100}}"

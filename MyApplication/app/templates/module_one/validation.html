@@ -1,0 +1,64 @@
+{% extends 'file.html' %} 
+{% block ajouter %}
+
+    <form action="/verify" method = "POST">
+        {% if choix == "paypal" %}
+        <div style="display:flex; flex-direction: column; border: 2px solid; 
+        border-radius: 25px ;
+        justify-content: space-between;">
+            {% for key, value in data.items() %}
+            <div style="display:flex; flex-direction: row; justify-content: space-around;">
+                <h4 style="color:black; font-family: Geneva;">{{key}} : </h4> <input type = "text" name = "{{key}}"  value="{{value}}"/>
+                <br>
+            </div>
+            <br>
+            {% endfor %}
+            <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png"
+             border="0" alt="Submit"/>
+        </div>
+
+        {% elif choix == "cartevisa" %}
+        <div style="display:flex; flex-direction: column; border: 2px solid; 
+        border-radius: 25px ;
+        justify-content: space-between;
+        width: 500px;
+        margin-top: 17px;
+        margin-bottom: 29px;
+        background-color: green;
+        ">
+            {% for key, value in data.items() %}
+                <div style="display:flex; flex-direction: row; 
+                justify-content: space-around;
+                margin: 5px;
+                align-items: center;
+                background-color: green;">
+                    <h3 style="color:black; font-family: Geneva;">{{key}} : </h3><input
+                    style="font-style: italic; font-weight: bold; color: green; font-size: 16px;
+                    text-align: center;" 
+                    type = "text" name = "{{key}}"  value="{{value}}"/>
+                    <br>
+                </div>
+                <br>
+            {% endfor %}
+        
+            <input type="image"
+            src="{{ url_for('static', filename= 'paybutton.png') }}" 
+            alt=""
+            width="160px"
+            height="50px"
+            border="0" alt="Submit"
+            style="
+            border-radius: 305px; 
+            margin-left: 35%;
+            flex-shrink: 0;
+            "
+            
+            />
+            <br>
+            <br>
+        </div>
+        <br>
+        <br>
+        {% endif %}
+    </form>
+{% endblock %}

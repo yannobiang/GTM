@@ -20,17 +20,20 @@ from flask import (
 
 from flask_mail import (Mail, Message)
 import stripe
+import paypalrestsdk as paypal
 
 
 baseurl=os.getcwd()
 
-# template_dir = '/home/princeobiang/nancy_creation/MyApplication/app/templates/'
-# static_dir = '/home/princeobiang/nancy_creation/MyApplication/app/static/'
-# images = '/home/princeobiang/nancy_creation/MyApplication/app/static/images/'
+template_dir = '/home/princeobiang/nancy_creation/MyApplication/app/templates/'
+static_dir = '/home/princeobiang/nancy_creation/MyApplication/app/static/'
+images = '/home/princeobiang/nancy_creation/MyApplication/app/images/'
 
-template_dir = 'C://Users//Projet//GTM//MyApplication//app//templates//'
-static_dir = 'C://Users//Projet//GTM//MyApplication//app//static//'
-images = 'C://Users//Projet//GTM/MyApplication//app//static//images//'
+paypal.configure({
+    "mode": "sandbox",  # sandbox or live
+    "client_id": "AUAtWnVEcSTDEvBI0B6ADtITPY5H4vJs38eA8so7TXvZBdRLhyz2qCTOi8FIa4cQOs9t5yGIACbU7Vz3",
+    "client_secret": "EIXdzjoDrkk3yJS4JgsXBNhwx9SDzBV2O6-MEMkLuF7zueT9dEFGka3tF-lw1EbDhat40A0UbFWuvl8P"
+    })
 
 app = Flask(__name__, template_folder = template_dir,  static_folder=static_dir
                         )
@@ -56,12 +59,8 @@ def home():
 
     if request.method == "POST":
         data = request.form.to_dict(flat= True)
-        #data = request.get_json()
-        
-        max_valu = 213
         return json.dumps(data)
-            #print(popo_list[0])
-        #return redirect(url_for('confirmation'))
+        
         
         
     return render_template(
@@ -75,47 +74,148 @@ def gabontransmoney():
 
     return redirect(url_for('home'))
 
-
-#@app.route('/confirmation de choix', methods = ['GET', 'POST'])
-#def confirmation():
-
-#    render_template('module_one/confirmation.html')
-    
-# Ajout de la partie trouvée sur internet ici 
-
-@app.route('/confirmation_de_choix', methods=['GET','POST'])
-def confirmation():
-
- 
-    
-    dict_table = {"popo": "france",
-                  "montant": 212
-                  }
-    max_valu = 254
+@app.route('/validation', methods=['GET','POST'])
+def validation():
     url_image =  'new_logo.jpg'
+    data = json.loads(request.args.get('montant'))
+    choix = data["transfert"]
+    return render_template("module_one/validation.html",
+                            url_image = url_image,
+                            data = data,
+                            choix = choix
+                            )
+
+@app.route('/verify', methods = ['GET', 'POST'])
+def verify():
+    if request.method == "POST":
+        data = request.form.to_dict()
+    
+        if data["transfert"] == "paypal":
+            montant = data['montant']
+            return redirect(f"/paypal_payment/{montant}")
+        elif data["transfert"] == "cartevisa":
+            try :
+                data = {i: j for i, j in data.items() if i not in ['x', 'y']}
+                
+            except:
+                pass
+            
+            data_string = json.dumps(data)
+            
+
+            return redirect(f"/confirmation_de_choix/{data_string}")
+
+    return abort("Bad request contact support")
+
+
+##################################### Paypal payement #####################################################
+
+@app.route('/paypal_Return', methods=['GET'])
+def paypal_Return():
+    # ID of the payment. This ID is provided when creating payment.
+    paymentId = request.args['paymentId']
+    payer_id = request.args['PayerID']
+    payment = paypal.Payment.find(paymentId)
+
+    # PayerID is required to approve the payment.
+    if payment.execute({"payer_id": payer_id}):  # return True or False
+        print("Payment[%s] execute successfully" % (payment.id))
+        return 'Payment execute successfully!' + payment.id
+    else:
+        print(payment.error)
+        return 'Payment execute ERROR!'
+
+
+@app.route('/paypal_payment/<montant>', methods=['GET'])
+def paypal_payment(montant):
+    # Payment
+    # A Payment Resource; create one using
+    # the above types and intent as 'sale'
+    payment = paypal.Payment({
+        "intent": "sale",
+
+        # Payer
+        # A resource representing a Payer that funds a payment
+        # Payment Method as 'paypal'
+        "payer": {
+            "payment_method": "paypal"},
+
+        # Redirect URLs
+        "redirect_urls": {
+            "return_url": url_for("succes"),
+            "cancel_url": url_for("echec")
+            },
+
+        # Transaction
+        # A transaction defines the contract of a
+        # payment - what is the payment for and who
+        # is fulfilling it.
+        "transactions": [{
+
+            # ItemList
+            "item_list": {
+                "items": [{
+                    "name": "item",
+                    "sku": "item",
+                    "price": f"{montant}",
+                    "currency": "EUR",
+                    "quantity": 1}]},
+
+            # Amount
+            # Let's you specify a payment amount.
+            "amount": {
+                "total": f"{montant}",
+                "currency": "EUR"},
+            "description": "test 123 This is the payment transaction description."}]})
+
+    # Create Payment and return status
+    if payment.create():
+        print("Payment[%s] created successfully" % (payment.id))
+        # Redirect the user to given approval url
+        for link in payment.links:
+            if link.method == "REDIRECT":
+                # Convert to str to avoid google appengine unicode issue
+                # https://github.com/paypal/rest-api-sdk-python/pull/58
+                redirect_url = str(link.href)
+                print("Redirect for approval: %s" % (redirect_url))
+                return redirect(redirect_url)
+    else:
+        print("Error while creating payment:")
+        print(payment.error)
+        return "Error while creating payment"
+
+
+##################################### stripe payement #####################################################
+
+@app.route('/confirmation_de_choix/<data>', methods=['GET','POST'])
+def confirmation(data):
+    #data = json.loads(request.args.get('montant'))
+    data_dict = json.loads(data)
+    url_image =  'new_logo.jpg'
+    max_valu = 300
+    email = data_dict["email"]
+    #email = request.args.get('email')
     #dict_table = dict(json.loads(os.environ['table']))
     #max_valu = float(os.environ['max_valu'])
-    
-    data = json.loads(request.args.get('montant'))
-    print(dict(data))
     return render_template('module_one/confirmation.html',
-                            data = data,
-                            max_valu = max_valu,
                             url_image = url_image,
+                            data = data_dict,
+                            max_valu = max_valu,
+                            email = email,
                             key=app.config['STRIPE_PUBLIC_KEY'])
 
 
 
-@app.route('/charge', methods=['POST'])
+@app.route('/charge', methods=['GET','POST'])
 def charge():
-
+    # Amount in cents
     data = request.form
     print(request.args)
     # Amount in cents
     amount = request.args.get('ammount')
 
     customer = stripe.Customer.create(
-        email='bermudezjoseline00@gmail.com',
+        email=request.form['stripeEmail'],
         source=request.form['stripeToken']
     )
 
@@ -123,16 +223,22 @@ def charge():
         customer=customer.id,
         amount=amount,
         currency='eur',
-        description='Flask Charge'
+        description='transfert argent via Gabontransmoney'
     )
-    #if request.method == 'POST':
+
+    if request.method == 'POST':
         
-    # msg = Message('Bonjour cher', sender = 'yannobiang3@gmail.com', recipients = ['enguienancy@gmail.com',
-    # 'florentchauvet22@gmail.com'])
-    # msg.body = "Hey Paul, sending you this email from my Flask app, lmk if it works"
-    # mail.send(msg)
-        #return "sent email"
-    return render_template('payements/succes.html', amount=amount)
+        try :
+            msg = Message('Bonjour cher', sender = 'yannobiang3@gmail.com', recipients = ['enguienancy@gmail.com',
+            'bermudezjoseline00@gmail.com'])
+            msg.body = "Hey Paul, sending you this email from my Flask app, lmk if it works"
+            mail.send(msg)
+            return "sent email"
+        except :
+            print("le quota de mail journalier a été dépassé.")
+            return "Vous devriez être informer de la transaction dans 3 minutes"
+        
+    return redirect(url_for('succes'))
 
 # fin de la partie trouvé sur internet ici.
 
@@ -152,8 +258,7 @@ def nancyservices():
 
 @app.route('/tarifs en Euro/', methods=['GET', 'POST'])
 def grille_euro():
-
-    
+  
     # Opening JSON file
     file = os.path.join(static_dir,'myJSON2.json') 
     url_image =  'new_logo.jpg'
@@ -200,12 +305,12 @@ def support():
 
     return render_template('module_three/index.html')
 
-@app.route('/transfert/succes')
+@app.route('/succes')
 def succes():
     return render_template('payements/succes.html')
 
 
-@app.route('/transfert/cancel')
+@app.route('/echec')
 def echec():
     return render_template('payements/echec.html')
 

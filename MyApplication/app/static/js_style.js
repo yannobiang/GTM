@@ -4,6 +4,7 @@ const navList = document.querySelector(".nav-list");
 const cont2_ex = document.querySelector(".cont2-ex");
 const body = document.querySelector("body");
 const letitre = document.getElementById("trans-title");
+const usermail = document.getElementById("usermail");
 const choose = document.querySelector(".choose");
 const column1 = document.querySelector(".column1");
 const send_button = document.querySelector(".estimer");
@@ -62,17 +63,21 @@ function getButRadio() {
 }
 
 function post_estimate() {
+  var mail = $("#usermail").val();
   var leChoix = getButRadio();
   var montantPay = montantant_pays();
   $.ajax({
     type: "POST",
-    url: "",
-    data: JSON.stringify({
-      checkchoose: leChoix,
-      montantPays: montantPay,
-    }),
+    data: {
+      montant: montantPay.montant,
+      pays: montantPay.country,
+      choix: leChoix.choisir,
+      transfert: leChoix.choixTrans,
+      email: mail,
+    },
     //dataType: "json",
-    contentType: "application/json;charset=UTF-8",
+  }).done(function (data) {
+    window.location.href = "/validation?montant=" + data;
   });
 }
 
@@ -114,14 +119,18 @@ function start() {
     var random = Math.floor(Math.random() * (max - min)) + min;
 
     for (let i = random; i < max; i++) {
-      images[i].style.display = "none";
-      images[i].style.transition = "5s";
+      if (images[i].classList[0].includes("img")) {
+        images[i].style.display = "none";
+        images[i].style.transition = "5s";
+      }
       //images[random + 1].style.display = "none";
       //images[max].style.display = "none";
     }
     for (let j = 1; j <= random; j++) {
-      images[j].style.display = "block";
-      images[j].style.transition = "5s";
+      if (images[j].classList[0].includes("img")) {
+        images[j].style.display = "block";
+        images[j].style.transition = "5s";
+      }
       //images[random + 1].style.display = "block";
       //images[max].style.display = "block";
     }
@@ -141,6 +150,7 @@ if (cancel != null) {
   cancel.addEventListener("click", () => {
     /* modification */
     letitre.style.display = "none";
+    usermail.style.display = "none";
     acceuil.style.display = "flex";
     estimateur.style.display = "none";
     cont2.style.display = "none";
@@ -173,7 +183,6 @@ if (acceuil.style.display != "none") {
     var min = 1;
     var max = images.length;
     var random = Math.floor(Math.random() * (max - min)) + min;
-
     for (let i = random; i < max; i++) {
       images[i].style.display = "none";
       images[i].style.transition = "5s";
@@ -190,7 +199,7 @@ if (acceuil.style.display != "none") {
 }
 */
 if (send_button != null) {
- // start();
+  // start();
   send_button.addEventListener("click", () => {
     const pays = document.getElementById("pays").value;
     const expr = document.getElementById("montant").value;
@@ -198,6 +207,7 @@ if (send_button != null) {
     if (pays == "france" && eval(expr) > 3000 && expr.length > 0) {
       alert("Entrer un montant inferieur à 3000 € !");
       estimateur.style.display = "none";
+      usermail.style.display = "none";
       cont2.style.display = "none";
       cont2_ex.style.display = "none";
       field.style.display = "none";
@@ -222,6 +232,7 @@ if (send_button != null) {
       alert("Choisis un pays et un montant");
       estimateur.style.display = "none";
       cont2.style.display = "none";
+      usermail.style.display = "none";
       cont2_ex.style.display = "none";
       field.style.display = "none";
       cont2_ex.style.fontStretch = "condensed";
@@ -250,6 +261,7 @@ if (send_button != null) {
       alert("Entrer un montant inferieur à 1 million de Franc CFA !");
       letitre.style.display = "none";
       estimateur.style.display = "none";
+      usermail.style.display = "none";
       acceuil.style.display = "block";
       acceuil.style.height = "340px";
       cont2.style.display = "none";
@@ -278,6 +290,7 @@ if (send_button != null) {
       acceuil.style.display = "none";
       cont2.style.display = "flex";
       cont2_ex.style.display = "flex";
+      usermail.style.display = "block";
       cont2.style.flexDirection = "column";
       cont2_ex.style.flexDirection = "column";
       cont2.style.color = "white";
@@ -444,7 +457,7 @@ if (send_button != null) {
         );
         mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
         letitre.innerHTML =
-          "Trandfert de La France vers Le " +
+          "Transfert de La France vers Le " +
           pays +
           " de " +
           expr +
@@ -458,7 +471,7 @@ if (send_button != null) {
               eval(airtelSansFrais / euro)
             ).toFixed(2),
             "Total-commission en CFA": eval(com2),
-            "Tatal-commission en €": Math.round(eval(com2) / euro).toFixed(2),
+            "Total-commission en €": Math.round(eval(com2) / euro).toFixed(2),
           },
 
           {
@@ -477,7 +490,7 @@ if (send_button != null) {
             Type: "Récuperer en main",
             "Montant-TTC en CFA": mainPropre,
             "Montant-TTC en €": Math.round(eval(mainPropre) / euro).toFixed(2),
-            "Tatal-commission en CFA": eval(com2),
+            "Total-commission en CFA": eval(com2),
             "Total-commission en €": Math.round(eval(com2) / euro).toFixed(2),
           },
         ];
@@ -551,15 +564,58 @@ if (send_button != null) {
 
         /* ici le cas de la deuxieme commission */
         switch (true) {
-          case eval(expr) <= 9.14:
-            com2 = Math.round(eval(500 / euro + 0.5)).toFixed(2);
+          case eval(expr) <= Math.round(eval(60000 / euro)).toFixed(2):
+            com2 = Math.round(500 / euro).toFixed(2);
 
             break;
-          case eval(expr) > 9.14:
-            com2 = Math.round(
-              (eval(expr) / 4.57) * eval(45 / euro) + eval(500 / euro) + 0.5
-            ).toFixed(2);
+          case eval(expr) > Math.round(60000 / euro).toFixed(2) &&
+            eval(expr) <= Math.round(90000 / euro).toFixed(2):
+            com2 = Math.round(700 / euro).toFixed(2);
 
+            break;
+          case eval(expr) > Math.round(90000 / euro).toFixed(2) &&
+            eval(expr) <= Math.round(120000 / euro).toFixed(2):
+            com2 = Math.round(900 / euro).toFixed(2);
+            break;
+
+          case eval(expr) > Math.round(120000 / euro).toFixed(2) &&
+            eval(expr) <= Math.round(150000 / euro).toFixed(2):
+            com2 = Math.round(1100 / euro).toFixed(2);
+            break;
+
+          case eval(expr) > Math.round(150000 / euro).toFixed(2) &&
+            eval(expr) <= Math.round(300000 / euro).toFixed(2):
+            com2 = Math.round(1300 / euro).toFixed(2);
+            break;
+
+          case eval(expr) > Math.round(300000 / euro).toFixed(2) &&
+            eval(expr) <= Math.round(400000 / euro).toFixed(2):
+            com2 = Math.round(1500 / euro).toFixed(2);
+            break;
+
+          case eval(expr) > Math.round(400000 / euro).toFixed(2) &&
+            eval(expr) <= Math.round(600000 / euro).toFixed(2):
+            com2 = Math.round(1900 / euro).toFixed(2);
+            break;
+
+          case eval(expr) > Math.round(600000 / euro).toFixed(2) &&
+            eval(expr) <= Math.round(1000000 / euro).toFixed(2):
+            com2 = Math.round(2300 / euro).toFixed(2);
+            break;
+
+          case eval(expr) > Math.round(1000000 / euro).toFixed(2) &&
+            eval(expr) <= Math.round(1500000 / euro).toFixed(2):
+            com2 = Math.round(2700 / euro).toFixed(2);
+            break;
+
+          case eval(expr) > Math.round(1500000 / euro).toFixed(2) &&
+            eval(expr) <= Math.round(2000000 / euro).toFixed(2):
+            com2 = Math.round(3100 / euro).toFixed(2);
+            break;
+
+          case eval(expr) > Math.round(2000000 / euro).toFixed(2) &&
+            eval(expr) <= Math.round(3000000 / euro).toFixed(2):
+            com2 = Math.round(3500 / euro).toFixed(2);
             break;
 
           default:
@@ -573,7 +629,7 @@ if (send_button != null) {
         mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
 
         letitre.innerHTML =
-          "Trandfert du Gabon vers La " + pays + " de " + expr + " €";
+          "Transfert du Gabon vers La " + pays + " de " + expr + " €";
 
         let informations = [
           {
@@ -583,7 +639,7 @@ if (send_button != null) {
               eval(airtelSansFrais * euro)
             ).toFixed(2),
             "Total-commission en €": eval(com2),
-            "Tatal-commission en CFA": Math.round(eval(com2) * euro).toFixed(2),
+            "Total-commission en CFA": Math.round(eval(com2) * euro).toFixed(2),
           },
 
           {
@@ -604,7 +660,7 @@ if (send_button != null) {
             "Montant-TTC en CFA": Math.round(eval(mainPropre) * euro).toFixed(
               2
             ),
-            "Tatal-commission en €": eval(com2),
+            "Total-commission en €": eval(com2),
             "Total-commission en CFA": Math.round(eval(com2) * euro).toFixed(2),
           },
         ];
@@ -628,11 +684,8 @@ if (send_button != null) {
 /*
 const checkout_public_key = '{{checkout_public_key}}'
 const checkout_session_id = '{{checkout_session_id}}'
-
 var stripe = Stripe(checkout_public_key);
-
 const button = document.querySelector("#buy_now_btn");
-
 button.addEventListener("click", (event) => {
   stripe
     .redirectToCheckout({
@@ -647,10 +700,8 @@ button.addEventListener("click", (event) => {
       // using `result.error.message`.
     });
 });
-
 /*
 const button = document.querySelector('#buy_now_btn');
-
 button.addEventListener('click', event => {
     fetch('/stripe_pay')
     .then((result) => { return result.json(); })
