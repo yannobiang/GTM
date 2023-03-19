@@ -7,7 +7,8 @@ static_folder='/home/princeobiang/nancy_projet/nancy_creation/MyApplication/test
 paypal.configure({
     "mode": "sandbox",  # sandbox or live
     "client_id": "AUAtWnVEcSTDEvBI0B6ADtITPY5H4vJs38eA8so7TXvZBdRLhyz2qCTOi8FIa4cQOs9t5yGIACbU7Vz3",
-    "client_secret": "EIXdzjoDrkk3yJS4JgsXBNhwx9SDzBV2O6-MEMkLuF7zueT9dEFGka3tF-lw1EbDhat40A0UbFWuvl8P"})
+    "client_secret": "EIXdzjoDrkk3yJS4JgsXBNhwx9SDzBV2O6-MEMkLuF7zueT9dEFGka3tF-lw1EbDhat40A0UbFWuvl8P"
+    })
 
 
 def to_json(func):

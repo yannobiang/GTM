@@ -48,8 +48,8 @@ app.config["MAIL_PASSWORD"]= "hklggfqntjaaktpo"
 stripe.api_key = app.config['STRIPE_SECRET_KEY']
 mail = Mail(app)
 
-@app.route('/', methods=['GET','POST'])
 
+@app.route('/', methods=['GET','POST'])
 def home():
 
     """the home page of our site"""
@@ -60,8 +60,6 @@ def home():
     if request.method == "POST":
         data = request.form.to_dict(flat= True)
         return json.dumps(data)
-        
-        
         
     return render_template(
         'module_one/index.html',
@@ -241,20 +239,6 @@ def charge():
     return redirect(url_for('succes'))
 
 # fin de la partie trouvé sur internet ici.
-
-@app.route('/nancyservices/', methods=['GET', 'POST'])
-def nancyservices():
-
-    url_image = 'logo_revedelice.png'
-    title = ""
-    if request.method == "POST":
-        data = request.form
-        print(data)
-        
-    return render_template('module_two/index.html',
-                            url_image = url_image
-                             )
-
 
 @app.route('/tarifs en Euro/', methods=['GET', 'POST'])
 def grille_euro():

@@ -40,10 +40,12 @@ function hrefFunction() {
 function montantant_pays() {
   var montPay = {};
   var info = $("#montant");
-  var pays = $("#pays option:selected");
+  var payso = $("#paysO option:selected");
+  var paysd = $("#paysD option:selected");
 
   montPay[info[0].name] = info[0].value;
-  montPay[pays[0].attributes.name.value] = pays[0].value;
+  montPay[payso[0].attributes.name.value] = payso[0].value;
+  montPay[paysd[0].attributes.name.value] = paysd[0].value;
 
   return montPay;
 }
@@ -70,7 +72,8 @@ function post_estimate() {
     type: "POST",
     data: {
       montant: montantPay.montant,
-      pays: montantPay.country,
+      pays_origine: montantPay.country_origine,
+      pays_destination: montantPay.country_destination,
       choix: leChoix.choisir,
       transfert: leChoix.choixTrans,
       email: mail,
@@ -108,6 +111,80 @@ function generateTable(table, data) {
       cell.appendChild(text);
     }
   }
+}
+
+// function calcul des commissions airtel money
+
+function commissionAirtel(expr) {
+  switch (true) {
+    case eval(expr) <= 1000:
+      com = 60;
+      break;
+    case eval(expr) > 1000 && eval(expr) <= 5000:
+      com = 110;
+      break;
+    case eval(expr) > 5000 && eval(expr) <= 10000:
+      com = 110;
+      break;
+
+    case eval(expr) > 10000 && eval(expr) <= 20000:
+      com = 210;
+      break;
+
+    case eval(expr) > 20000 && eval(expr) <= 30000:
+      com = 310;
+      break;
+
+    case eval(expr) > 30000 && eval(expr) <= 40000:
+      com = 410;
+      break;
+
+    case eval(expr) > 40000 && eval(expr) <= 60000:
+      com = 610;
+      break;
+
+    case eval(expr) > 60000 && eval(expr) <= 100000:
+      com = 810;
+      break;
+
+    case eval(expr) > 100000 && eval(expr) <= 500000:
+      com = 1550;
+      break;
+
+    case eval(expr) > 500000 && eval(expr) <= 1000000:
+      com = 2600;
+      break;
+
+    case eval(expr) > 1000000 && eval(expr) <= 2000000:
+      com = 3400;
+      break;
+    case eval(expr) > 2000000 && eval(expr) < 3500000:
+      com = ((eval(expr) + 500000) / 500000) * 500 + 3400;
+      break;
+
+    default:
+      alert("Veuillez entrer une somme inferieur à 3.5 millions de Franc CFA");
+  }
+  return com;
+}
+
+// function calcul commission du transfert
+function commissionTransfertxfa(expr) {
+  if (eval(expr) < 100000) {
+    commi = 7000;
+  } else {
+    commi = 7000 + (eval(expr) / 100000) * 2400;
+  }
+  return commi;
+}
+
+function commissionTransferteuro(expr) {
+  if (eval(expr) <= 9.14) {
+    commi = 1;
+  } else {
+    commi = Math.round(eval((eval(expr) * 45) / (4.57 * 656) + 1.5)).toFixed(2);
+  }
+  return commi;
 }
 
 // Function to start setInterval call
@@ -175,37 +252,15 @@ if (cancel != null) {
   });
 }
 
-/*
-if (acceuil.style.display != "none") {
-  console.log("popo");
-  setInterval(function () {
-    var images = $("img");
-    var min = 1;
-    var max = images.length;
-    var random = Math.floor(Math.random() * (max - min)) + min;
-    for (let i = random; i < max; i++) {
-      images[i].style.display = "none";
-      images[i].style.transition = "5s";
-      //images[random + 1].style.display = "none";
-      //images[max].style.display = "none";
-    }
-    for (let j = 1; j <= random; j++) {
-      images[j].style.display = "block";
-      images[j].style.transition = "5s";
-      //images[random + 1].style.display = "block";
-      //images[max].style.display = "block";
-    }
-  }, 3000);
-}
-*/
 if (send_button != null) {
-  // start();
+  start();
   send_button.addEventListener("click", () => {
-    const pays = document.getElementById("pays").value;
+    const paysO = document.getElementById("paysO").value;
+    const paysD = document.getElementById("paysD").value;
     const expr = document.getElementById("montant").value;
 
-    if (pays == "france" && eval(expr) > 3000 && expr.length > 0) {
-      alert("Entrer un montant inferieur à 3000 € !");
+    if (paysO == "france" && eval(expr) > 4000 && expr.length > 0) {
+      alert("Entrer un montant inferieur à 4000 € !");
       estimateur.style.display = "none";
       usermail.style.display = "none";
       cont2.style.display = "none";
@@ -228,8 +283,15 @@ if (send_button != null) {
       image8.style.display = "block";
       image6.style.display = "block";
       image9.style.display = "block";
-    } else if (pays.length == 0 || expr.length == 0 || expr == 0) {
-      alert("Choisis un pays et un montant");
+    } else if (
+      paysD.length == 0 ||
+      paysO.length == 0 ||
+      expr.length == 0 ||
+      expr == 0
+    ) {
+      alert(
+        "Choisis un pays de destination /n un pays d'origine et un montant"
+      );
       estimateur.style.display = "none";
       cont2.style.display = "none";
       usermail.style.display = "none";
@@ -257,8 +319,8 @@ if (send_button != null) {
       image8.style.display = "block";
       image6.style.display = "block";
       image9.style.display = "block";
-    } else if (eval(expr) > 3200000 && pays == "gabon") {
-      alert("Entrer un montant inferieur à 1 million de Franc CFA !");
+    } else if (eval(expr) > 3200000 && paysO == "gabon") {
+      alert("Entrer un montant inferieur à 3.2 million de Franc CFA !");
       letitre.style.display = "none";
       estimateur.style.display = "none";
       usermail.style.display = "none";
@@ -326,147 +388,32 @@ if (send_button != null) {
       let airtelSansFrais = 0;
       let mainPropre = 0;
       let airAvecFrais = 0;
-
-      if (pays == "gabon") {
+      // l argent est entre dans la devise du pays du paysD
+      if (paysO == "gabon" && paysD == "france") {
         /*commission un pour les transfert airtel */
-        switch (true) {
-          case eval(expr) <= 1000:
-            com = 60;
-            break;
-          case eval(expr) > 1000 && eval(expr) <= 5000:
-            com = 110;
-            break;
-          case eval(expr) > 5000 && eval(expr) <= 10000:
-            com = 110;
-            break;
-
-          case eval(expr) > 10000 && eval(expr) <= 20000:
-            com = 210;
-            break;
-
-          case eval(expr) > 20000 && eval(expr) <= 30000:
-            com = 310;
-            break;
-
-          case eval(expr) > 30000 && eval(expr) <= 40000:
-            com = 410;
-            break;
-
-          case eval(expr) > 40000 && eval(expr) <= 60000:
-            com = 610;
-            break;
-
-          case eval(expr) > 60000 && eval(expr) <= 100000:
-            com = 810;
-            break;
-
-          case eval(expr) > 100000 && eval(expr) <= 500000:
-            com = 1550;
-            break;
-
-          case eval(expr) > 500000 && eval(expr) <= 1000000:
-            com = 2600;
-            break;
-
-          case eval(expr) > 1000000 && eval(expr) <= 2000000:
-            com = 3400;
-            break;
-          case eval(expr) > 2000000 && eval(expr) < 3500000:
-            com = ((eval(expr) + 500000) / 500000) * 500 + 3400;
-            break;
-
-          default:
-            alert(
-              "Veuillez entrer une somme inferieur à 3.5 millions de Franc CFA"
-            );
-        }
-
+        // la somme est directement saisie en xfa
+        com = commissionAirtel(expr);
         /* ici le cas de la deuxieme commission */
+        com2 = commissionTransfertxfa(expr);
 
-        switch (true) {
-          case eval(expr) > 0 && eval(expr) <= 100000:
-            com2 = 3000;
-            break;
-          case eval(expr) > 100000 && eval(expr) <= 200000:
-            com2 = 1500 + 3000;
-            break;
-          case eval(expr) > 200000 && eval(expr) <= 300000:
-            com2 = eval(1500 * 2) + 3000;
-            break;
-          case eval(expr) > 300000 && eval(expr) <= 400000:
-            com2 = eval(1500 * 3) + 3000;
-            break;
-          case eval(expr) > 400000 && eval(expr) <= 500000:
-            com2 = eval(1500 * 4) + 3000;
-            break;
-          case eval(expr) > 500000 && eval(expr) <= 600000:
-            com2 = eval(1500 * 5) + 3000;
-            break;
-          case eval(expr) > 600000 && eval(expr) <= 700000:
-            com2 = eval(1500 * 6) + 3000;
-            break;
-          case eval(expr) > 700000 && eval(expr) <= 800000:
-            com2 = eval(1500 * 7) + 3000;
-            break;
-          case eval(expr) > 800000 && eval(expr) <= 900000:
-            com2 = eval(1500 * 8) + 3000;
-            break;
-          case eval(expr) > 900000 && eval(expr) <= 1000000:
-            com2 = eval(1500 * 9) + 3000;
-            break;
-          case eval(expr) > 1000000 && eval(expr) <= 1100000:
-            com2 = eval(1500 * 10) + 3000;
-            break;
-          case eval(expr) > 1100000 && eval(expr) <= 1200000:
-            com2 = eval(1500 * 11) + 3000;
-            break;
-          case eval(expr) > 1200000 && eval(expr) <= 1300000:
-            com2 = eval(1500 * 12) + 3000;
-            break;
-          case eval(expr) > 1300000 && eval(expr) <= 1400000:
-            com2 = eval(1500 * 13) + 3000;
-            break;
-          case eval(expr) > 1400000 && eval(expr) <= 1500000:
-            com2 = eval(1500 * 14) + 3000;
-            break;
-          case eval(expr) > 1500000 && eval(expr) <= 1600000:
-            com2 = eval(1500 * 15) + 3000;
-            break;
-          case eval(expr) > 1600000 && eval(expr) <= 1700000:
-            com2 = eval(1500 * 16) + 3000;
-            break;
-          case eval(expr) > 1700000 && eval(expr) <= 1800000:
-            com2 = eval(1500 * 17) + 3000;
-            break;
-          case eval(expr) > 1800000 && eval(expr) <= 1900000:
-            com2 = eval(1500 * 18) + 3000;
-            break;
-          case eval(expr) > 1900000 && eval(expr) <= 2000000:
-            com2 = eval(1500 * 19) + 3000;
-            break;
-          case eval(expr) > 2000000:
-            com2 = ((eval(expr) + 100000) / 100000) * 1500 + 3000;
-            break;
-
-          default:
-            console.log("Je ne peux calculer la seconde commission");
-        }
         airtelSansFrais = Math.round(eval(expr) + eval(com2)).toFixed(2);
         airAvecFrais = Math.round(eval(expr) + eval(com) + eval(com2)).toFixed(
           2
         );
         mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
         letitre.innerHTML =
-          "Transfert de La France vers Le " +
-          pays +
+          "Transfert de La" +
+          paysO +
+          " vers Le " +
+          paysD +
           " de " +
           expr +
-          " Franc CFA";
+          " xfa";
 
         let informations = [
           {
             Type: "Airtel-sans-frais",
-            "Montant-TTC en CFA": airtelSansFrais,
+            "Montant-TTC en xfa": airtelSansFrais,
             "Montant-TTC en €": Math.round(
               eval(airtelSansFrais / euro)
             ).toFixed(2),
@@ -503,124 +450,13 @@ if (send_button != null) {
         } else {
           console.log("je ne suis donc plus vide");
         }
-      } else if (pays == "france") {
-        switch (true) {
-          case eval(expr) <= Math.round(1000 / euro).toFixed(2):
-            com = Math.round(60 / euro).toFixed(2);
-            break;
-          case eval(expr) > Math.round(1000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(5000 / euro).toFixed(2):
-            com = Math.round(110 / euro).toFixed(2);
-            break;
-          case eval(expr) > Math.round(5000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(10000 / euro).toFixed(2):
-            com = Math.round(110 / euro).toFixed(2);
-            break;
+      } else if (paysD == "gabon" && paysO == "france") {
+        // le montant est saisi en euro
+        expr_xfa = eval(eval(expr) * 656);
 
-          case eval(expr) > Math.round(10000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(20000 / euro).toFixed(2):
-            com = Math.round(210 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(20000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(30000 / euro).toFixed(2):
-            com = Math.round(310 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(30000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(40000).toFixed(2):
-            com = Math.round(410 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(40000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(60000 / euro).toFixed(2):
-            com = Math.round(610 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(60000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(100000 / euro).toFixed(2):
-            com = Math.round(810 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(100000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(500000 / euro).toFixed(2):
-            com = Math.round(1550 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(500000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(1000000 / euro).toFixed(2):
-            com = Math.round(2600 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(1000000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(2000000 / euro).toFixed(2):
-            com = Math.round(3400 / euro).toFixed(2);
-            break;
-
-          default:
-            alert("Veuillez entrer une somme inferieur à 3 000 €");
-            break;
-        }
-
-        /* ici le cas de la deuxieme commission */
-        switch (true) {
-          case eval(expr) <= Math.round(eval(60000 / euro)).toFixed(2):
-            com2 = Math.round(500 / euro).toFixed(2);
-
-            break;
-          case eval(expr) > Math.round(60000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(90000 / euro).toFixed(2):
-            com2 = Math.round(700 / euro).toFixed(2);
-
-            break;
-          case eval(expr) > Math.round(90000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(120000 / euro).toFixed(2):
-            com2 = Math.round(900 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(120000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(150000 / euro).toFixed(2):
-            com2 = Math.round(1100 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(150000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(300000 / euro).toFixed(2):
-            com2 = Math.round(1300 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(300000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(400000 / euro).toFixed(2):
-            com2 = Math.round(1500 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(400000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(600000 / euro).toFixed(2):
-            com2 = Math.round(1900 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(600000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(1000000 / euro).toFixed(2):
-            com2 = Math.round(2300 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(1000000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(1500000 / euro).toFixed(2):
-            com2 = Math.round(2700 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(1500000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(2000000 / euro).toFixed(2):
-            com2 = Math.round(3100 / euro).toFixed(2);
-            break;
-
-          case eval(expr) > Math.round(2000000 / euro).toFixed(2) &&
-            eval(expr) <= Math.round(3000000 / euro).toFixed(2):
-            com2 = Math.round(3500 / euro).toFixed(2);
-            break;
-
-          default:
-            alert("Pas de transfert au dessus de 3000 €");
-        }
+        com_xfa = commissionAirtel(expr_xfa);
+        com = eval(com_xfa / 656);
+        com2 = commissionTransferteuro(expr);
 
         airtelSansFrais = Math.round(eval(expr) + eval(com2)).toFixed(2);
         airAvecFrais = Math.round(
@@ -629,39 +465,120 @@ if (send_button != null) {
         mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
 
         letitre.innerHTML =
-          "Transfert du Gabon vers La " + pays + " de " + expr + " €";
+          "Transfert du" + paysO + " vers La " + paysD + " de " + expr + " €";
 
         let informations = [
           {
             Type: "Airtel-sans-frais",
             "Montant-TTC en €": airtelSansFrais,
-            "Montant-TTC en CFA": Math.round(
+            "Montant-TTC en xfa": Math.round(
               eval(airtelSansFrais * euro)
             ).toFixed(2),
             "Total-commission en €": eval(com2),
-            "Total-commission en CFA": Math.round(eval(com2) * euro).toFixed(2),
+            "Total-commission en xfa": Math.round(eval(com2) * euro).toFixed(2),
           },
 
           {
             Type: "Airtel-avec-frais",
             "Montant-TTC en €": airAvecFrais,
-            "Montant-TTC en CFA": Math.round(eval(airAvecFrais * euro)).toFixed(
+            "Montant-TTC en xfa": Math.round(eval(airAvecFrais * euro)).toFixed(
               2
             ),
             "Total-commission en €": eval(com) + eval(com2),
-            "Total-commission en CFA": Math.round(
-              eval((eval(com) + eval(0.25)) * euro + eval(com2) * euro)
+            "Total-commission en xfa": Math.round(
+              eval(eval(com) * euro + eval(com2) * euro)
             ).toFixed(2),
           },
 
           {
             Type: "Récuperer en main",
             "Montant-TTC en €": mainPropre,
-            "Montant-TTC en CFA": Math.round(eval(mainPropre) * euro).toFixed(
+            "Montant-TTC en xfa": Math.round(eval(mainPropre) * euro).toFixed(
               2
             ),
             "Total-commission en €": eval(com2),
-            "Total-commission en CFA": Math.round(eval(com2) * euro).toFixed(2),
+            "Total-commission en xfa": Math.round(eval(com2) * euro).toFixed(2),
+          },
+        ];
+        const table = document.querySelector("table");
+        if (table.rows.length == 0) {
+          console.log("je suis vide");
+          let data = Object.keys(informations[0]);
+          generateTableHead(table, data);
+          generateTable(table, informations);
+        } else {
+          console.log("je ne suis donc plus vide");
+        }
+      } else if (paysO == "france" && paysD == "france") {
+        // le montant est saisi en euro
+        com2 = commissionTransferteuro(expr);
+        airtelSansFrais = Math.round(eval(expr) + eval(com2)).toFixed(2);
+        letitre.innerHTML =
+          "Transfert du" + paysO + " vers La " + paysD + " de " + expr + " €";
+
+        let informations = [
+          {
+            Type: "Airtel-sans-frais",
+            "Montant-TTC en €": "Unavailable",
+            "Montant-TTC en xfa": "Unavailable",
+            "Total-commission en €": "Unavailable",
+          },
+
+          {
+            Type: "Récuperer en main",
+            "Montant-TTC en €": airtelSansFrais,
+            "Total-commission en €": eval(com2),
+            "Total-commission en xfa": "Unavailable",
+          },
+        ];
+        const table = document.querySelector("table");
+        if (table.rows.length == 0) {
+          console.log("je suis vide");
+          let data = Object.keys(informations[0]);
+          generateTableHead(table, data);
+          generateTable(table, informations);
+        } else {
+          console.log("je ne suis donc plus vide");
+        }
+      } else if (paysD == "gabon" && paysO == "gabon") {
+        /*commission un pour les transfert airtel */
+        // la somme est directement saisie en xfa
+        com = commissionAirtel(expr);
+        /* ici le cas de la deuxieme commission */
+        com2 = commissionTransfertxfa(expr);
+
+        airtelSansFrais = Math.round(eval(expr) + eval(com2)).toFixed(2);
+        airAvecFrais = Math.round(eval(expr) + eval(com) + eval(com2)).toFixed(
+          2
+        );
+        mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
+        letitre.innerHTML =
+          "Transfert de La" +
+          paysO +
+          " vers Le " +
+          paysD +
+          " de " +
+          expr +
+          " xfa";
+
+        let informations = [
+          {
+            Type: "Airtel-sans-frais",
+            "Montant-TTC en xfa": airtelSansFrais,
+            "Total-commission en xfa": eval(com2),
+          },
+
+          {
+            Type: "Airtel-avec-frais",
+            "Montant-TTC en xfa": airAvecFrais,
+
+            "Total-commission en xfa": eval(com) + eval(com2),
+          },
+
+          {
+            Type: "Récuperer en main",
+            "Montant-TTC en xfa": mainPropre,
+            "Total-commission en xfa": eval(com2),
           },
         ];
         const table = document.querySelector("table");

@@ -267,7 +267,15 @@ li {
   font-style: normal;
 }
 
-#pays {
+#paysO {
+  border: 0;
+  outline: 0;
+  width: 80%;
+  margin-bottom: 80px;
+  font-size: 15px;
+  font-family: "Times New Roman", Times, serif;
+}
+#paysD {
   border: 0;
   outline: 0;
   width: 80%;
@@ -556,17 +564,26 @@ form {
 @media (max-width: 1920px) and (min-width: 1200px) {
 
   .total {
-    height: 100vh;
+    height: 120vh;
   }
     .acceuil {
         display: flex;
         flex-direction: column;
         justify-content: flex-between;
-        width: 160px;
-        height: 340px;
-        margin: 20px 20px 20px 80px;
+        width:  59%;
+        height: 400px;
+        margin: 10% 5% 5% 30%;
         background-color: white;
       }
+    .acceuil > h3 {
+      margin-left: 25px !important;
+      margin-bottom: 10px !important;;
+      color: black;
+
+    }
+    .acceuil > button {
+     margin : 20% 10% 0% 30%;
+    }
 
     .contents {
         display: flex;
