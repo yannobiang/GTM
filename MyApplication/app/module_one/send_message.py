@@ -56,7 +56,8 @@ def envoie_msg(message, full_pdf_name ):
     session.login(sender, password)
     
     text = message.as_string()
-    session.sendmail(sender, receiver, text)
+    for receveur in receiver:
+        session.sendmail(sender, receveur, text)
     session.quit()
     print('Mail Sent')
 

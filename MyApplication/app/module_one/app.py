@@ -20,6 +20,7 @@ from flask import (
     redirect
 )
 
+from .send_message import *
 from flask_mail import (Mail, Message)
 import stripe
 import paypalrestsdk as paypal
@@ -163,14 +164,11 @@ def airtelmoney(data):
     ############################## send invoice per email ##################################
 
     try :
-            msg = Message('Facture', sender = 'yannobiang3@gmail.com', recipients = ['enguienancy@gmail.com',
-            'bermudezjoseline00@gmail.com'])
-            msg.body = "Bpnjour vous trouverez votre facture attachée à ce message. Gabontransmoney vous remercie"
-            msg.attached(rendered_pdf)
-            mail.send(msg)
-            return "sent email"
+        message = """Bonjour je vous remercie pour 
+        votre transfère vous trouverez la facture attaché"""
+        envoie_msg(message = message, full_pdf_name = rendered_pdf )
+
     except :
-        print()
         pass
 
 
