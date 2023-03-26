@@ -10,7 +10,7 @@ class Estimation():
 
     def __init__(self, montant, pays):
 
-        self.montant = montant
+        self.montant = float(montant)
         self.pays = pays
 
     def comAirtel(self):

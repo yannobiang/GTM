@@ -561,6 +561,102 @@ form {
 }
 
 
+.invoice-box {
+  max-width: 800px;
+  margin: auto;
+  padding: 30px;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+  color: #555;
+}
+
+.invoice-box table {
+  width: 100%;
+  line-height: inherit;
+  text-align: left;
+}
+
+.invoice-box table td {
+  padding: 5px;
+  vertical-align: top;
+}
+
+.invoice-box table tr td:nth-child(2) {
+  text-align: right;
+}
+
+.invoice-box table tr.top table td {
+  padding-bottom: 20px;
+}
+
+.invoice-box table tr.top table td.title {
+  font-size: 45px;
+  line-height: 45px;
+  color: #333;
+}
+
+.invoice-box table tr.information table td {
+  background-color: grey;
+  padding-bottom: 40px;
+  margin: 5px 6px 5px 5px;
+}
+
+.invoice-box table tr.heading td {
+  background: #eee;
+  background-color: grey;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+  margin: 2px 6px 2px 2px;
+}
+
+.invoice-box table tr.details td {
+  padding-bottom: 20px;
+  margin: 1px 6px 1px 1px;
+}
+
+.invoice-box table tr.item td{
+  border-bottom: 1px solid #eee;
+}
+
+.invoice-box table tr.item.last td {
+  border-bottom: none;
+}
+
+.invoice-box table tr.total td:nth-child(2) {
+  border-top: 2px solid #eee;
+  font-weight: bold;
+}
+
+.information {
+  margin : 20px 20px 20px 20px;
+}
+
+div.divFooter {
+  position: fixed;
+  height: 30px;
+  background-color: purple;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+}
+
+/** RTL **/
+.rtl {
+  direction: rtl;
+  font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+}
+
+.rtl table {
+  text-align: right;
+  margin: 2px 2px 2px 2px;
+}
+
+.rtl table tr td:nth-child(2) {
+  text-align: left;
+}
+
+
 @media (max-width: 1920px) and (min-width: 1200px) {
 
   .total {
@@ -610,6 +706,9 @@ form {
     background-repeat: no-repeat;
     background-position-x: right;
     background-size: 430px;
+}
+.menu {
+  display: inline;
 }
   .logo {
     margin-top: 10px;
@@ -731,6 +830,19 @@ form {
   .estimer {
     margin: 90px 10px 0px 70px;
   }
+  .invoice-box table tr.top table td {
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin: 2px 2px 2px 2px;
+  }
+  
+  .invoice-box table tr.information table td {
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin: 2px 2px 2px 2px;
+  }
 }
 
 @media (max-width: 390px) {
@@ -742,6 +854,41 @@ form {
     .img1, .img2, .img3, .image5, .img6,
     .img7, .img8, .img9 {
         display: none;
+    }
+
+    .menu {
+      display: inline;
+    }
+    .logo {
+      margin-top: 10px;
+      margin-left: 2px;
+    }
+    .nav-list {
+      list-style-type: none;
+      width: 100%;
+      text-align: center;
+      padding-top: 10px;
+      display: none;
+    }
+    .nav-list .list-items {
+      display: block;
+      border-top: 1px solid white;
+    }
+    .active {
+      display: block;
+    }
+    .invoice-box table tr.top table td {
+      width: 100%;
+      display: block;
+      text-align: center;
+      margin: 2px 2px 2px 2px;
+    }
+    
+    .invoice-box table tr.information table td {
+      width: 100%;
+      display: block;
+      text-align: center;
+      margin: 2px 2px 2px 2px;
     }
 }
 

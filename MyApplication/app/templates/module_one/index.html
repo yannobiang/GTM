@@ -69,6 +69,7 @@
     <h4 id="trans-title"></h4>
 
     <div class="acceuil">
+      
       <h3 style="margin-left: 45px;margin-bottom: 10px;color: black;">
         Estimation des frais
       </h3>
@@ -109,7 +110,6 @@
       ></table>
 
       <br />
-      <input id="usermail" type="email" name="email">
       <br>
       <br>
       <fieldset>
@@ -121,12 +121,23 @@
             type="radio"
             id="airtelmoney"
             name="choisir"
-            value="artelmoney"
+            value="airtelmoney"
           />
           <label for="main">
             Sans Airtel-Money
           </label>
           <input type="radio" id="main" name="choisir" value="sansairtel" />
+          <br>
+          <input 
+          style="margin-left:30%; margin-right: 5%;
+          border: white ;
+          border-radius: 45px 45px 45px 45px;
+          padding: 5px 5px 5px 5px;
+          height: 40px;
+          background-color: #77b5fe;
+          color: white;
+          "
+          id="usermail" type="email" name="email" placeholder="Email">
         </div>
         <div class="cont2-ex">
           <label for="paypal">
@@ -138,7 +149,7 @@
           </label>
           <input type="radio" id="visa" name="choixTrans" value="cartevisa" />
           <label for="prendre">
-            En main propre
+            Aucun des autres
           </label>
           <input
             type="radio"

@@ -1,7 +1,9 @@
 import os
 import ast
 import json
+import datetime
 import requests
+from weasyprint import HTML
 import json2html
 from .formatting_data import extract_data_db
 from .estimation import *
@@ -45,6 +47,7 @@ app.config["MAIL_USE_TLS"]= False
 app.config["MAIL_USE_SSL"]= True
 app.config["MAIL_USERNAME"]= "yannobiang3@gmail.com"
 app.config["MAIL_PASSWORD"]= "hklggfqntjaaktpo"
+
 stripe.api_key = app.config['STRIPE_SECRET_KEY']
 mail = Mail(app)
 
@@ -88,10 +91,13 @@ def verify():
     if request.method == "POST":
         data = request.form.to_dict()
     
-        if data["transfert"] == "paypal":
+        if data["transfert"] == "paypal" and data["pays_origine"] == "france":
             montant = data['montant']
             return redirect(f"/paypal_payment/{montant}")
-        elif data["transfert"] == "cartevisa":
+
+        elif data["choix"] == "airtelmoney" and data["transfert"] == "prendreargent":
+            print(" je suis bien entré")
+            print(data)
             try :
                 data = {i: j for i, j in data.items() if i not in ['x', 'y']}
                 
@@ -99,11 +105,84 @@ def verify():
                 pass
             
             data_string = json.dumps(data)
-            
 
+            return redirect(f"/airtelmoney/{data_string}")
+
+        elif data["transfert"] == "cartevisa" and data["pays_origine"] == "france":
+            try :
+                data = {i: j for i, j in data.items() if i not in ['x', 'y']}
+                
+            except:
+                pass
+            
+            data_string = json.dumps(data)
             return redirect(f"/confirmation_de_choix/{data_string}")
 
     return abort("Bad request contact support")
+
+
+####################################### Airtel money ######################################################
+@app.route('/airtelmoney/<data>', methods = [ 'GET'])
+def airtelmoney(data):
+    url_image =  'new_logo.jpg'
+
+    ############## contruction des delais de remboursement ####################
+
+    toto = datetime.datetime.today()
+    today = datetime.datetime.today().strftime("%B %-d, %Y")
+    d = datetime.timedelta(weeks=2)
+    duree = toto + d
+
+    ############## recuperation ###############################################
+
+    data_dict = json.loads(data)
+    email = data_dict["email"]
+    info = Estimation(data_dict["montant"], data_dict["pays_origine"])
+    envoieAirtel = info.send()["envoieAirtel"]
+    
+    airtelCom = info.send()["airtelCom"]
+    comTransfert = info.send()["comTransfert"]
+    envoieSansAirtel = info.send()["envoieSansAirtel"]
+    numeroAirtel = data_dict["numeroAirtel"]
+    pays_origine = data_dict["pays_origine"]
+    pays_destination = data_dict["pays_destination"]
+
+    rendered = render_template("module_one/airtelMoney.html",
+                            url_image = url_image,
+                            numeroAirtel = numeroAirtel,
+                            pays_destination = pays_destination,
+                            envoieSansAirtel = envoieSansAirtel, 
+                            pays_origine = pays_origine,
+                            today = today, duree = duree.strftime("%B %-d, %Y"),
+                            email = email, envoieAirtel=envoieAirtel,
+                            airtelCom = airtelCom, comTransfert = comTransfert)
+    
+    html = HTML(string=rendered)
+    rendered_pdf = html.write_pdf()
+
+    ############################## send invoice per email ##################################
+
+    try :
+            msg = Message('Facture', sender = 'yannobiang3@gmail.com', recipients = ['enguienancy@gmail.com',
+            'bermudezjoseline00@gmail.com'])
+            msg.body = "Bpnjour vous trouverez votre facture attachée à ce message. Gabontransmoney vous remercie"
+            msg.attached(rendered_pdf)
+            mail.send(msg)
+            return "sent email"
+    except :
+        print()
+        pass
+
+
+    return render_template("module_one/airtelMoney.html",
+                            url_image = url_image,
+                            numeroAirtel = numeroAirtel,
+                            pays_destination = pays_destination,
+                            envoieSansAirtel = envoieSansAirtel, 
+                            pays_origine = pays_origine,
+                            today = today, duree = duree.strftime("%B %-d, %Y"),
+                            email = email, envoieAirtel=envoieAirtel,
+                            airtelCom = airtelCom, comTransfert = comTransfert)
 
 
 ##################################### Paypal payement #####################################################
@@ -240,7 +319,7 @@ def charge():
 
 # fin de la partie trouvé sur internet ici.
 
-@app.route('/tarifs en Euro/', methods=['GET', 'POST'])
+@app.route('/tarifs en Euros/', methods=['GET', 'POST'])
 def grille_euro():
   
     # Opening JSON file
@@ -261,7 +340,7 @@ def grille_euro():
 
 
 
-@app.route('/tarifs en Franc/', methods=['GET', 'POST'])
+@app.route('/tarifs en XFA/', methods=['GET', 'POST'])
 def grille_cfa():
 
 

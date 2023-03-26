@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>A simple, clean, and responsive HTML invoice template</title>
+  
+  <style>
+   
+  </style>
+</head>
+
+<body>
+
+  <div class="invoice-box">
+    <table cellpadding="0" cellspacing="0">
+      <tr class="top">
+        <td colspan="2">
+          <table>
+            <tr>
+              <td class="title">
+               <img class ="logo" src="{{ url_for('static', filename= '')}}{{url_image}}" alt=""
+               style="height: 100px;">
+                
+              </td>
+              <td>
+                Invoice #: 123<br>
+                Créée: {{today}}<br>
+                Durée: {{duree}}
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      
+      <tr class="information">
+        <td colspan="2">
+          <table>
+            <tr>
+              <td>
+                <strong>Gabontransmoney.<br>
+                12345 Sunny Road</strong><br>
+                <strong>Adresse</strong> :<br> 
+                34000 Montepellier
+              </td>
+              
+              <td>
+                <strong> Destinataire.<br>
+                Email<br></strong>
+                {{email}}
+              </td>
+              <td>
+               <strong>Pays d'Origine :</strong> <br>
+               <em style ="text-transform:uppercase;">{{pays_origine}}</em>
+              </td>
+              <td>
+               <strong>Pays de Destination : </strong><br>
+               <em style ="text-transform:uppercase;">{{pays_destination}}</em>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr class="heading">
+         
+        <td>
+          <strong>Type Frais</strong> 
+        </td>
+        <td>
+          <strong>Prix du transfert</strong>
+        </td>
+      </tr>
+      <tr>
+         <td></td>
+         <td></td>
+      </tr>
+      <tr class="item">
+         <td>
+           <strong>Montant de l'envoie :</strong> <br> 
+          
+         </td>
+         <td>
+            {{envoieSansAirtel - comTransfert}} xfa
+         </td>
+       </tr>
+      <tr class="item">
+        <td>
+          <strong>Commission de l'envoie :</strong> <br> 
+          (cf. page commiddion) 
+        </td>
+        <td>
+         {{comTransfert}} xfa
+        </td>
+      </tr>
+      
+      <tr class="item">
+        <td>
+          <strong>Commission airtel :</strong> <br>
+          (cf. page airtel money) 
+        </td>
+        <td>
+          {{airtelCom}} xfa
+        </td>
+      </tr>
+      
+      <tr class="item last">
+        <td></td>
+        <td>
+          <strong>Total transfert sans airtel :</strong> {{envoieSansAirtel}} xfa
+        </td>
+      </tr>
+      
+      <tr class="total">
+        <td></td>
+        <td>
+           <strong> Total transfert avec airtel:</strong> {{envoieAirtel}} xfa
+        </td>
+      </tr>
+    </table>
+    <p style="color:green; font-weight: bold;"> Vous pouvez dès à présent contacter ou envoyer directement votre argent au : +241 74 45 17 81
+    </p>
+    <p style="color:green; font-weight: bold;">Votre numéro est bien le : {{numeroAirtel}}</p>
+  </div>
+  <div class="divFooter"></div>
+
+</body>
+</html>

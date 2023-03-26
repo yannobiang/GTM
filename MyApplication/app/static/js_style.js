@@ -402,7 +402,7 @@ if (send_button != null) {
         );
         mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
         letitre.innerHTML =
-          "Transfert de La" +
+          "Transfert de La " +
           paysO +
           " vers Le " +
           paysD +
@@ -413,7 +413,7 @@ if (send_button != null) {
         let informations = [
           {
             Type: "Airtel-sans-frais",
-            "Montant-TTC en xfa": airtelSansFrais,
+            "Montant-TTC en xfa": Math.round(airtelSansFrais).toFixed(2),
             "Montant-TTC en €": Math.round(
               eval(airtelSansFrais / euro)
             ).toFixed(2),
@@ -423,7 +423,7 @@ if (send_button != null) {
 
           {
             Type: "Airtel-avec-frais",
-            "Montant-TTC en CFA": airAvecFrais,
+            "Montant-TTC en CFA": Math.round(airAvecFrais).toFixed(2),
             "Montant-TTC en €": Math.round(eval(airAvecFrais / euro)).toFixed(
               2
             ),
@@ -435,7 +435,7 @@ if (send_button != null) {
 
           {
             Type: "Récuperer en main",
-            "Montant-TTC en CFA": mainPropre,
+            "Montant-TTC en CFA": Math.round(mainPropre).toFixed(2),
             "Montant-TTC en €": Math.round(eval(mainPropre) / euro).toFixed(2),
             "Total-commission en CFA": eval(com2),
             "Total-commission en €": Math.round(eval(com2) / euro).toFixed(2),
@@ -465,12 +465,12 @@ if (send_button != null) {
         mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
 
         letitre.innerHTML =
-          "Transfert du" + paysO + " vers La " + paysD + " de " + expr + " €";
+          "Transfert du " + paysO + " vers La " + paysD + " de " + expr + " €";
 
         let informations = [
           {
             Type: "Airtel-sans-frais",
-            "Montant-TTC en €": airtelSansFrais,
+            "Montant-TTC en €": Math.round(airtelSansFrais).toFixed(2),
             "Montant-TTC en xfa": Math.round(
               eval(airtelSansFrais * euro)
             ).toFixed(2),
@@ -480,7 +480,7 @@ if (send_button != null) {
 
           {
             Type: "Airtel-avec-frais",
-            "Montant-TTC en €": airAvecFrais,
+            "Montant-TTC en €": Math.round(airAvecFrais).toFixed(2),
             "Montant-TTC en xfa": Math.round(eval(airAvecFrais * euro)).toFixed(
               2
             ),
@@ -514,7 +514,7 @@ if (send_button != null) {
         com2 = commissionTransferteuro(expr);
         airtelSansFrais = Math.round(eval(expr) + eval(com2)).toFixed(2);
         letitre.innerHTML =
-          "Transfert du" + paysO + " vers La " + paysD + " de " + expr + " €";
+          "Transfert du " + paysO + " vers La " + paysD + " de " + expr + " €";
 
         let informations = [
           {
@@ -525,13 +525,14 @@ if (send_button != null) {
           },
 
           {
-            Type: "Récuperer en main",
+            Type: "Envoie d'argent",
             "Montant-TTC en €": airtelSansFrais,
+            "Total-commission en xfa": "Unavaible",
             "Total-commission en €": eval(com2),
-            "Total-commission en xfa": "Unavailable",
           },
         ];
         const table = document.querySelector("table");
+
         if (table.rows.length == 0) {
           console.log("je suis vide");
           let data = Object.keys(informations[0]);
@@ -553,7 +554,7 @@ if (send_button != null) {
         );
         mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
         letitre.innerHTML =
-          "Transfert de La" +
+          "Transfert de La " +
           paysO +
           " vers Le " +
           paysD +
@@ -564,20 +565,20 @@ if (send_button != null) {
         let informations = [
           {
             Type: "Airtel-sans-frais",
-            "Montant-TTC en xfa": airtelSansFrais,
+            "Montant-TTC en xfa": Math.round(airtelSansFrais).toFixed(2),
             "Total-commission en xfa": eval(com2),
           },
 
           {
             Type: "Airtel-avec-frais",
-            "Montant-TTC en xfa": airAvecFrais,
+            "Montant-TTC en xfa": Math.round(airAvecFrais).toFixed(2),
 
             "Total-commission en xfa": eval(com) + eval(com2),
           },
 
           {
             Type: "Récuperer en main",
-            "Montant-TTC en xfa": mainPropre,
+            "Montant-TTC en xfa": Math.round(mainPropre).toFixed(2),
             "Total-commission en xfa": eval(com2),
           },
         ];
@@ -595,45 +596,3 @@ if (send_button != null) {
     }
   });
 }
-
-/* action periodique*/
-
-/*
-const checkout_public_key = '{{checkout_public_key}}'
-const checkout_session_id = '{{checkout_session_id}}'
-var stripe = Stripe(checkout_public_key);
-const button = document.querySelector("#buy_now_btn");
-button.addEventListener("click", (event) => {
-  stripe
-    .redirectToCheckout({
-      // Make the id field from the Checkout Session creation API response
-      // available to this file, so you can provide it as parameter here
-      // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
-      sessionId: checkout_session_id,
-    })
-    .then(function (result) {
-      // If `redirectToCheckout` fails due to a browser or network
-      // error, display the localized error message to your customer
-      // using `result.error.message`.
-    });
-});
-/*
-const button = document.querySelector('#buy_now_btn');
-button.addEventListener('click', event => {
-    fetch('/stripe_pay')
-    .then((result) => { return result.json(); })
-    .then((data) => {
-        var stripe = Stripe(data.checkout_public_key);
-        stripe.redirectToCheckout({
-            // Make the id field from the Checkout Session creation API response
-            // available to this file, so you can provide it as parameter here
-            // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
-            sessionId: data.checkout_session_id
-        }).then(function (result) {
-            // If `redirectToCheckout` fails due to a browser or network
-            // error, display the localized error message to your customer
-            // using `result.error.message`.
-        });
-    })
-});
-*/
