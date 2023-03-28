@@ -160,7 +160,6 @@ def airtelmoney(data):
                             airtelCom = airtelCom, comTransfert = comTransfert)
     
     html = HTML(string=rendered)
-    print(rendered)
     rendered_pdf = html.write_pdf()
     
     ############################## send invoice per email ##################################
