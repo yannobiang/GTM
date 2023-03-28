@@ -2,6 +2,7 @@ import os
 import ast
 import json
 import datetime
+import pdfkit
 import requests
 from weasyprint import HTML
 import json2html
@@ -159,18 +160,16 @@ def airtelmoney(data):
                             airtelCom = airtelCom, comTransfert = comTransfert)
     
     html = HTML(string=rendered)
+    print(rendered)
     rendered_pdf = html.write_pdf()
-
+    
     ############################## send invoice per email ##################################
 
-    try :
-        message = """Bonjour je vous remercie pour 
-        votre transfère vous trouverez la facture attaché"""
-        envoie_msg(message = message, full_pdf_name = rendered_pdf )
-
-    except :
-        pass
-
+    msg = Message('Bonjour cher', sender = 'yannobiang3@gmail.com', recipients = ['enguienancy@gmail.com',
+            email])
+    msg.body = "Bonjour, Nous vous remercions pour la confiance témoignée à Gabontransmoney"
+    msg.html = rendered
+    mail.send(msg)
 
     return render_template("module_one/airtelMoney.html",
                             url_image = url_image,
