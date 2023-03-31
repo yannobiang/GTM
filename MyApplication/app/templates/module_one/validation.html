@@ -18,7 +18,8 @@
             <br>
             {% endfor %}
             <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png"
-             border="0" alt="Submit"/>
+             border="0" alt="Submit"
+             style="width:150px; margin-left: 27%; margin-bottom: 5%;"/>
         </div>
 
         {% elif choix == "cartevisa" %}
@@ -33,7 +34,8 @@
             {% for key, value in data.items() %}
                 <div style="display:flex; flex-direction: row; 
                 justify-content: space-around;
-                margin: 5px;
+                margin: 10px 10px 10px 10px;
+                height: 100px;
                 align-items: center;
                 background-color: green;">
                     <h3 style="color:black; font-family: Geneva;">{{key}} : </h3><input

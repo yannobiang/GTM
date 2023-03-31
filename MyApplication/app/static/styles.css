@@ -845,7 +845,7 @@ div.divFooter {
   }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 930px) {
 
     .contents {
         
@@ -853,8 +853,19 @@ div.divFooter {
     }
     .img1, .img2, .img3, .image5, .img6,
     .img7, .img8, .img9 {
-        display: none;
+        position : relative;
+        top: 3%;
+        left: 2%;
     }
+    .acceuil{
+      margin: 2px 2px 2px 2px;  
+    }
+    .estimer {
+      background-color: green;
+      border-radius: 10px 10px 10px 10px;
+      margin: 6px 2px 0px 34px;
+      width: 100px;
+  }
 
     .menu {
       display: inline;
