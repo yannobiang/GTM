@@ -29,8 +29,8 @@ import paypalrestsdk as paypal
 
 baseurl=os.getcwd()
 
-template_dir = '/home/princeobiang/nancy_creation/MyApplication/app/templates/'
-static_dir = '/home/princeobiang/nancy_creation/MyApplication/app/static/'
+template_dir = '/home/princeobiang/nancy_creation/MyApplication/app/module_one/templates/'
+static_dir = '/home/princeobiang/nancy_creation/MyApplication/app/module_one/static/'
 images = '/home/princeobiang/nancy_creation/MyApplication/app/images/'
 
 paypal.configure({
@@ -207,7 +207,6 @@ def paypal_payment(montant):
     # A Payment Resource; create one using
     # the above types and intent as 'sale'
     data_dict = json.loads(montant)
-    print(data_dict)
     info = Estimation(data_dict["montant"], data_dict["pays"])
     envoieAirtel = info.send()["envoieAirtel"]
     
