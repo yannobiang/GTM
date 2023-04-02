@@ -1,0 +1,18 @@
+{
+  "builds": [
+    {
+      "src": "Myapplication/app/module_one/app.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    
+                {
+                  "src": "/(.*)",
+                  "dest": "Myapplication/app/module_one/app.py"
+                },
+                { "src": "/(.*)", "dest": "/api/api/popo.html" }
+    
+               
+              ]
+}
