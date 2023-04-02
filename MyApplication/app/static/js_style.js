@@ -1,4 +1,5 @@
 const toggleButton = document.querySelector(".menu");
+
 const field = document.querySelector("fieldset");
 const navList = document.querySelector(".nav-list");
 const cont2_ex = document.querySelector(".cont2-ex");
@@ -163,7 +164,7 @@ function commissionAirtel(expr) {
       break;
 
     default:
-      alert("Veuillez entrer une somme inferieur à 3.5 millions de Franc CFA");
+      alert("Veuillez entrer une somme inferieur à 3.5 millions de Franc xfa");
   }
   return com;
 }
@@ -226,6 +227,7 @@ toggleButton.addEventListener("click", () => {
 if (cancel != null) {
   cancel.addEventListener("click", () => {
     /* modification */
+
     letitre.style.display = "none";
     usermail.style.display = "none";
     acceuil.style.display = "flex";
@@ -237,6 +239,7 @@ if (cancel != null) {
     bulle.style.display = "block";
     paint.style.width = "auto";
     paint.style.height = "auto";
+    contents.style.display = "flex";
     contents.style.width = "61%";
 
     image1.style.display = "block";
@@ -248,6 +251,10 @@ if (cancel != null) {
     image8.style.display = "block";
     image6.style.display = "block";
     image9.style.display = "block";
+    const tailScreen = window.screen.width;
+    if (tailScreen <= 432) {
+      footer.style.bottom = "74px";
+    }
     //start();
   });
 }
@@ -320,7 +327,7 @@ if (send_button != null) {
       image6.style.display = "block";
       image9.style.display = "block";
     } else if (eval(expr) > 3200000 && paysO == "gabon") {
-      alert("Entrer un montant inferieur à 3.2 million de Franc CFA !");
+      alert("Entrer un montant inferieur à 3.2 million de Franc xfa !");
       letitre.style.display = "none";
       estimateur.style.display = "none";
       usermail.style.display = "none";
@@ -347,252 +354,532 @@ if (send_button != null) {
       image9.style.display = "block";
       start();
     } else {
-      /*cont1.style.flexDirection = "column";*/
-      field.style.display = "flex";
-      acceuil.style.display = "none";
-      cont2.style.display = "flex";
-      cont2_ex.style.display = "flex";
-      usermail.style.display = "block";
-      cont2.style.flexDirection = "column";
-      cont2_ex.style.flexDirection = "column";
-      cont2.style.color = "white";
-      cont2_ex.style.color = "white";
-      cont2.style.fontWeight = "bold";
-      cont2_ex.style.fontWeight = "bold";
-      cont2.style.margin = "10px 5px 20px 2px";
-      cont2_ex.style.margin = "10px 5px 20px 2px";
-      cont3.style.display = "flex";
-      cont3.style.flexDirection = "row";
-      cont3.style.justifyContent = "center;";
-      estimateur.style.display = "block";
-      letitre.style.display = "block";
-      paint.style.width = "65%";
-      contents.style.width = "35%";
+      const tailleEcran = window.screen.width;
+      console.log(tailleEcran);
+      if (tailleEcran > 432) {
+        //====================== ajout de condition sur responsive ==================================
 
-      // images
+        /*cont1.style.flexDirection = "column";*/
+        field.style.display = "flex";
+        acceuil.style.display = "none";
+        cont2.style.display = "flex";
+        cont2_ex.style.display = "flex";
+        usermail.style.display = "block";
+        cont2.style.flexDirection = "column";
+        cont2_ex.style.flexDirection = "column";
+        cont2.style.color = "white";
+        cont2_ex.style.color = "white";
+        cont2.style.fontWeight = "bold";
+        cont2_ex.style.fontWeight = "bold";
+        cont2.style.margin = "10px 5px 20px 2px";
+        cont2_ex.style.margin = "10px 5px 20px 2px";
+        cont3.style.display = "flex";
+        cont3.style.flexDirection = "row";
+        cont3.style.justifyContent = "center;";
+        estimateur.style.display = "block";
+        letitre.style.display = "block";
+        paint.style.width = "65%";
+        contents.style.width = "35%";
 
-      image1.style.display = "none";
-      image2.style.display = "none";
-      image3.style.display = "none";
-      image5.style.display = "none";
-      image7.style.display = "none";
-      image8.style.display = "none";
-      image6.style.display = "none";
-      image9.style.display = "none";
+        // images
 
-      // fin add images
+        image1.style.display = "none";
+        image2.style.display = "none";
+        image3.style.display = "none";
+        image5.style.display = "none";
+        image7.style.display = "none";
+        image8.style.display = "none";
+        image6.style.display = "none";
+        image9.style.display = "none";
 
-      const euro = 656;
-      let com = 0;
-      let com2 = 0;
-      let airtelSansFrais = 0;
-      let mainPropre = 0;
-      let airAvecFrais = 0;
-      // l argent est entre dans la devise du pays du paysD
-      if (paysO == "gabon" && paysD == "france") {
-        /*commission un pour les transfert airtel */
-        // la somme est directement saisie en xfa
-        com = commissionAirtel(expr);
-        /* ici le cas de la deuxieme commission */
-        com2 = commissionTransfertxfa(expr);
+        // fin add images
 
-        airtelSansFrais = Math.round(eval(expr) + eval(com2)).toFixed(2);
-        airAvecFrais = Math.round(eval(expr) + eval(com) + eval(com2)).toFixed(
-          2
-        );
-        mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
-        letitre.innerHTML =
-          "Transfert de La " +
-          paysO +
-          " vers Le " +
-          paysD +
-          " de " +
-          expr +
-          " xfa";
+        const euro = 656;
+        let com = 0;
+        let com2 = 0;
+        let airtelSansFrais = 0;
+        let mainPropre = 0;
+        let airAvecFrais = 0;
+        // l argent est entre dans la devise du pays du paysD
+        if (paysO == "gabon" && paysD == "france") {
+          /*commission un pour les transfert airtel */
+          // la somme est directement saisie en xfa
+          com = commissionAirtel(expr);
+          /* ici le cas de la deuxieme commission */
+          com2 = commissionTransfertxfa(expr);
 
-        let informations = [
-          {
-            Type: "Airtel-sans-frais",
-            "Montant-TTC en xfa": Math.round(airtelSansFrais).toFixed(2),
-            "Montant-TTC en €": Math.round(
-              eval(airtelSansFrais / euro)
-            ).toFixed(2),
-            "Total-commission en CFA": eval(com2),
-            "Total-commission en €": Math.round(eval(com2) / euro).toFixed(2),
-          },
+          airtelSansFrais = Math.round(eval(expr) + eval(com2)).toFixed(2);
+          airAvecFrais = Math.round(
+            eval(expr) + eval(com) + eval(com2)
+          ).toFixed(2);
+          mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
+          letitre.innerHTML =
+            "Transfert de La " +
+            paysO +
+            " vers Le " +
+            paysD +
+            " de " +
+            expr +
+            " xfa";
 
-          {
-            Type: "Airtel-avec-frais",
-            "Montant-TTC en CFA": Math.round(airAvecFrais).toFixed(2),
-            "Montant-TTC en €": Math.round(eval(airAvecFrais / euro)).toFixed(
-              2
-            ),
-            "Total-commission en CFA": eval(com) + eval(com2),
-            "Total-commission en €": Math.round(
-              eval(eval(com) / euro + eval(com2) / euro)
-            ).toFixed(2),
-          },
+          let informations = [
+            {
+              Type: "Airtel-sans-frais",
+              "Montant-TTC en xfa": Math.round(airtelSansFrais).toFixed(2),
+              "Montant-TTC en €": Math.round(
+                eval(airtelSansFrais / euro)
+              ).toFixed(2),
+              "Total-commission en xfa": eval(com2),
+              "Total-commission en €": Math.round(eval(com2) / euro).toFixed(2),
+            },
 
-          {
-            Type: "Récuperer en main",
-            "Montant-TTC en CFA": Math.round(mainPropre).toFixed(2),
-            "Montant-TTC en €": Math.round(eval(mainPropre) / euro).toFixed(2),
-            "Total-commission en CFA": eval(com2),
-            "Total-commission en €": Math.round(eval(com2) / euro).toFixed(2),
-          },
-        ];
-        const table = document.querySelector("table");
-        if (table.rows.length == 0) {
-          console.log("je suis vide");
-          let data = Object.keys(informations[0]);
-          generateTableHead(table, data);
-          generateTable(table, informations);
-        } else {
-          console.log("je ne suis donc plus vide");
+            {
+              Type: "Airtel-avec-frais",
+              "Montant-TTC en xfa": Math.round(airAvecFrais).toFixed(2),
+              "Montant-TTC en €": Math.round(eval(airAvecFrais / euro)).toFixed(
+                2
+              ),
+              "Total-commission en xfa": eval(com) + eval(com2),
+              "Total-commission en €": Math.round(
+                eval(eval(com) / euro + eval(com2) / euro)
+              ).toFixed(2),
+            },
+
+            {
+              Type: "Récuperer en main",
+              "Montant-TTC en xfa": Math.round(mainPropre).toFixed(2),
+              "Montant-TTC en €": Math.round(eval(mainPropre) / euro).toFixed(
+                2
+              ),
+              "Total-commission en xfa": eval(com2),
+              "Total-commission en €": Math.round(eval(com2) / euro).toFixed(2),
+            },
+          ];
+          const table = document.querySelector("table");
+          if (table.rows.length == 0) {
+            console.log("je suis vide");
+            let data = Object.keys(informations[0]);
+            generateTableHead(table, data);
+            generateTable(table, informations);
+          } else {
+            console.log("je ne suis donc plus vide");
+          }
+        } else if (paysD == "gabon" && paysO == "france") {
+          // le montant est saisi en euro
+          expr_xfa = eval(eval(expr) * 656);
+
+          com_xfa = commissionAirtel(expr_xfa);
+          com = eval(com_xfa / 656);
+          com2 = commissionTransferteuro(expr);
+
+          airtelSansFrais = Math.round(eval(expr) + eval(com2)).toFixed(2);
+          airAvecFrais = Math.round(
+            eval(expr) + (eval(com) + eval(0.25) + eval(com2))
+          ).toFixed(2);
+          mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
+
+          letitre.innerHTML =
+            "Transfert du " +
+            paysO +
+            " vers La " +
+            paysD +
+            " de " +
+            expr +
+            " €";
+
+          let informations = [
+            {
+              Type: "Airtel-sans-frais",
+              "Montant-TTC en €": Math.round(airtelSansFrais).toFixed(2),
+              "Montant-TTC en xfa": Math.round(
+                eval(airtelSansFrais * euro)
+              ).toFixed(2),
+              "Total-commission en €": eval(com2),
+              "Total-commission en xfa": Math.round(eval(com2) * euro).toFixed(
+                2
+              ),
+            },
+
+            {
+              Type: "Airtel-avec-frais",
+              "Montant-TTC en €": Math.round(airAvecFrais).toFixed(2),
+              "Montant-TTC en xfa": Math.round(
+                eval(airAvecFrais * euro)
+              ).toFixed(2),
+              "Total-commission en €": eval(com) + eval(com2),
+              "Total-commission en xfa": Math.round(
+                eval(eval(com) * euro + eval(com2) * euro)
+              ).toFixed(2),
+            },
+
+            {
+              Type: "Récuperer en main",
+              "Montant-TTC en €": mainPropre,
+              "Montant-TTC en xfa": Math.round(eval(mainPropre) * euro).toFixed(
+                2
+              ),
+              "Total-commission en €": eval(com2),
+              "Total-commission en xfa": Math.round(eval(com2) * euro).toFixed(
+                2
+              ),
+            },
+          ];
+          const table = document.querySelector("table");
+          if (table.rows.length == 0) {
+            console.log("je suis vide");
+            let data = Object.keys(informations[0]);
+            generateTableHead(table, data);
+            generateTable(table, informations);
+          } else {
+            console.log("je ne suis donc plus vide");
+          }
+        } else if (paysO == "france" && paysD == "france") {
+          // le montant est saisi en euro
+          com2 = commissionTransferteuro(expr);
+          airtelSansFrais = Math.round(eval(expr) + eval(com2)).toFixed(2);
+          letitre.innerHTML =
+            "Transfert du " +
+            paysO +
+            " vers La " +
+            paysD +
+            " de " +
+            expr +
+            " €";
+
+          let informations = [
+            {
+              Type: "Airtel-sans-frais",
+              "Montant-TTC en €": "Unavailable",
+              "Montant-TTC en xfa": "Unavailable",
+              "Total-commission en €": "Unavailable",
+            },
+
+            {
+              Type: "Envoie d'argent",
+              "Montant-TTC en €": airtelSansFrais,
+              "Total-commission en xfa": "Unavaible",
+              "Total-commission en €": eval(com2),
+            },
+          ];
+          const table = document.querySelector("table");
+
+          if (table.rows.length == 0) {
+            console.log("je suis vide");
+            let data = Object.keys(informations[0]);
+            generateTableHead(table, data);
+            generateTable(table, informations);
+          } else {
+            console.log("je ne suis donc plus vide");
+          }
+        } else if (paysD == "gabon" && paysO == "gabon") {
+          /*commission un pour les transfert airtel */
+          // la somme est directement saisie en xfa
+          com = commissionAirtel(expr);
+          /* ici le cas de la deuxieme commission */
+          com2 = commissionTransfertxfa(expr);
+
+          airtelSansFrais = Math.round(eval(expr) + eval(com2)).toFixed(2);
+          airAvecFrais = Math.round(
+            eval(expr) + eval(com) + eval(com2)
+          ).toFixed(2);
+          mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
+          letitre.innerHTML =
+            "Transfert de La " +
+            paysO +
+            " vers Le " +
+            paysD +
+            " de " +
+            expr +
+            " xfa";
+
+          let informations = [
+            {
+              Type: "Airtel-sans-frais",
+              "Montant-TTC en xfa": Math.round(airtelSansFrais).toFixed(2),
+              "Total-commission en xfa": eval(com2),
+            },
+
+            {
+              Type: "Airtel-avec-frais",
+              "Montant-TTC en xfa": Math.round(airAvecFrais).toFixed(2),
+
+              "Total-commission en xfa": eval(com) + eval(com2),
+            },
+
+            {
+              Type: "Récuperer en main",
+              "Montant-TTC en xfa": Math.round(mainPropre).toFixed(2),
+              "Total-commission en xfa": eval(com2),
+            },
+          ];
+          const table = document.querySelector("table");
+          if (table.rows.length == 0) {
+            console.log("je suis vide");
+            let data = Object.keys(informations[0]);
+            generateTableHead(table, data);
+            generateTable(table, informations);
+          } else {
+            console.log("je ne suis donc plus vide");
+          }
         }
-      } else if (paysD == "gabon" && paysO == "france") {
-        // le montant est saisi en euro
-        expr_xfa = eval(eval(expr) * 656);
+        stop();
 
-        com_xfa = commissionAirtel(expr_xfa);
-        com = eval(com_xfa / 656);
-        com2 = commissionTransferteuro(expr);
+        //===================== fin d'ajout condition sur responsive ================================
+      } else if (tailleEcran <= 432) {
+        const footer = document.querySelector("footer");
+        const table_estimation = document.getElementById("table-estimation");
+        table_estimation.style.backgroundColor = "#77b5fe";
+        footer.style.bottom = "-200px";
+        paint.style.width = "100%";
+        contents.style.display = "none";
+        /*cont1.style.flexDirection = "column";*/
+        field.style.display = "flex";
+        acceuil.style.display = "none";
+        cont2.style.display = "flex";
+        cont2_ex.style.display = "flex";
+        usermail.style.display = "block";
+        cont2.style.flexDirection = "column";
+        cont2_ex.style.flexDirection = "column";
+        cont2.style.color = "white";
+        cont2_ex.style.color = "white";
+        cont2.style.fontWeight = "bold";
+        cont2_ex.style.fontWeight = "bold";
+        cont2.style.margin = "10px 5px 20px 2px";
+        cont2_ex.style.margin = "10px 5px 20px 2px";
+        cont3.style.display = "flex";
+        cont3.style.flexDirection = "row";
+        cont3.style.justifyContent = "center;";
+        estimateur.style.display = "block";
+        letitre.style.display = "block";
 
-        airtelSansFrais = Math.round(eval(expr) + eval(com2)).toFixed(2);
-        airAvecFrais = Math.round(
-          eval(expr) + (eval(com) + eval(0.25) + eval(com2))
-        ).toFixed(2);
-        mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
+        // images
 
-        letitre.innerHTML =
-          "Transfert du " + paysO + " vers La " + paysD + " de " + expr + " €";
+        image1.style.display = "none";
+        image2.style.display = "none";
+        image3.style.display = "none";
+        image5.style.display = "none";
+        image7.style.display = "none";
+        image8.style.display = "none";
+        image6.style.display = "none";
+        image9.style.display = "none";
 
-        let informations = [
-          {
-            Type: "Airtel-sans-frais",
-            "Montant-TTC en €": Math.round(airtelSansFrais).toFixed(2),
-            "Montant-TTC en xfa": Math.round(
-              eval(airtelSansFrais * euro)
-            ).toFixed(2),
-            "Total-commission en €": eval(com2),
-            "Total-commission en xfa": Math.round(eval(com2) * euro).toFixed(2),
-          },
+        // fin add images
 
-          {
-            Type: "Airtel-avec-frais",
-            "Montant-TTC en €": Math.round(airAvecFrais).toFixed(2),
-            "Montant-TTC en xfa": Math.round(eval(airAvecFrais * euro)).toFixed(
-              2
-            ),
-            "Total-commission en €": eval(com) + eval(com2),
-            "Total-commission en xfa": Math.round(
-              eval(eval(com) * euro + eval(com2) * euro)
-            ).toFixed(2),
-          },
+        const euro = 656;
+        let com = 0;
+        let com2 = 0;
+        let airtelSansFrais = 0;
+        let mainPropre = 0;
+        let airAvecFrais = 0;
 
-          {
-            Type: "Récuperer en main",
-            "Montant-TTC en €": mainPropre,
-            "Montant-TTC en xfa": Math.round(eval(mainPropre) * euro).toFixed(
-              2
-            ),
-            "Total-commission en €": eval(com2),
-            "Total-commission en xfa": Math.round(eval(com2) * euro).toFixed(2),
-          },
-        ];
-        const table = document.querySelector("table");
-        if (table.rows.length == 0) {
-          console.log("je suis vide");
-          let data = Object.keys(informations[0]);
-          generateTableHead(table, data);
-          generateTable(table, informations);
-        } else {
-          console.log("je ne suis donc plus vide");
+        // l argent est entre dans la devise du paysO
+        if (paysO == "gabon" && paysD == "france") {
+          /*commission un pour les transfert airtel */
+          // la somme est directement saisie en xfa
+          com = commissionAirtel(expr);
+          /* ici le cas de la deuxieme commission */
+          com2 = commissionTransfertxfa(expr);
+
+          airtelSansFrais = Math.round(eval(expr) + eval(com2)).toFixed(2);
+          airAvecFrais = Math.round(
+            eval(expr) + eval(com) + eval(com2)
+          ).toFixed(2);
+          mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
+          letitre.innerHTML =
+            "Transfert de La " +
+            paysO +
+            " vers Le " +
+            paysD +
+            " de " +
+            expr +
+            " xfa";
+
+          let informations = [
+            {
+              Type: "Airtel-sans-frais",
+              "Montant-TTC en xfa": Math.round(airtelSansFrais).toFixed(2),
+              "Montant-TTC en €": Math.round(
+                eval(airtelSansFrais / euro)
+              ).toFixed(2),
+              "Total-commission en xfa": eval(com2),
+            },
+
+            {
+              Type: "Airtel-avec-frais",
+              "Montant-TTC en xfa": Math.round(airAvecFrais).toFixed(2),
+              "Montant-TTC en €": Math.round(eval(airAvecFrais / euro)).toFixed(
+                2
+              ),
+              "Total-commission en xfa": eval(com) + eval(com2),
+            },
+
+            {
+              Type: "Récuperer en main",
+              "Montant-TTC en xfa": Math.round(mainPropre).toFixed(2),
+              "Montant-TTC en €": Math.round(eval(mainPropre) / euro).toFixed(
+                2
+              ),
+              "Total-commission en xfa": eval(com2),
+            },
+          ];
+          const table = document.querySelector("table");
+          if (table.rows.length == 0) {
+            console.log("je suis vide");
+            let data = Object.keys(informations[0]);
+            generateTableHead(table, data);
+            generateTable(table, informations);
+          } else {
+            console.log("je ne suis donc plus vide");
+          }
+        } else if (paysD == "gabon" && paysO == "france") {
+          // le montant est saisi en euro
+          expr_xfa = eval(eval(expr) * 656);
+
+          com_xfa = commissionAirtel(expr_xfa);
+          com = eval(com_xfa / 656);
+          com2 = commissionTransferteuro(expr);
+
+          airtelSansFrais = Math.round(eval(expr) + eval(com2)).toFixed(2);
+          airAvecFrais = Math.round(
+            eval(expr) + (eval(com) + eval(0.25) + eval(com2))
+          ).toFixed(2);
+          mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
+
+          letitre.innerHTML =
+            "Transfert du " +
+            paysO +
+            " vers La " +
+            paysD +
+            " de " +
+            expr +
+            " €";
+
+          let informations = [
+            {
+              Type: "Airtel-sans-frais",
+              "Montant-TTC en €": Math.round(airtelSansFrais).toFixed(2),
+              "Montant-TTC en xfa": Math.round(
+                eval(airtelSansFrais * euro)
+              ).toFixed(2),
+              "Total-commission en €": eval(com2),
+            },
+
+            {
+              Type: "Airtel-avec-frais",
+              "Montant-TTC en €": Math.round(airAvecFrais).toFixed(2),
+              "Montant-TTC en xfa": Math.round(
+                eval(airAvecFrais * euro)
+              ).toFixed(2),
+              "Total-commission en €": eval(com) + eval(com2),
+            },
+
+            {
+              Type: "Récuperer en main",
+              "Montant-TTC en €": mainPropre,
+              "Montant-TTC en xfa": Math.round(eval(mainPropre) * euro).toFixed(
+                2
+              ),
+              "Total-commission en €": eval(com2),
+            },
+          ];
+          const table = document.querySelector("table");
+          if (table.rows.length == 0) {
+            console.log("je suis vide");
+            let data = Object.keys(informations[0]);
+            generateTableHead(table, data);
+            generateTable(table, informations);
+          } else {
+            console.log("je ne suis donc plus vide");
+          }
+        } else if (paysO == "france" && paysD == "france") {
+          // le montant est saisi en euro
+          com2 = commissionTransferteuro(expr);
+          airtelSansFrais = Math.round(eval(expr) + eval(com2)).toFixed(2);
+          letitre.innerHTML =
+            "Transfert du " +
+            paysO +
+            " vers La " +
+            paysD +
+            " de " +
+            expr +
+            " €";
+
+          let informations = [
+            {
+              Type: "Airtel-sans-frais",
+              "Montant-TTC en €": "Unavailable",
+              "Total-commission en €": "Unavailable",
+            },
+
+            {
+              Type: "Envoie d'argent",
+              "Montant-TTC en €": airtelSansFrais,
+              "Total-commission en €": eval(com2),
+            },
+          ];
+          const table = document.querySelector("table");
+
+          if (table.rows.length == 0) {
+            console.log("je suis vide");
+            let data = Object.keys(informations[0]);
+            generateTableHead(table, data);
+            generateTable(table, informations);
+          } else {
+            console.log("je ne suis donc plus vide");
+          }
+        } else if (paysD == "gabon" && paysO == "gabon") {
+          /*commission un pour les transfert airtel */
+          // la somme est directement saisie en xfa
+          com = commissionAirtel(expr);
+          /* ici le cas de la deuxieme commission */
+          com2 = commissionTransfertxfa(expr);
+
+          airtelSansFrais = Math.round(eval(expr) + eval(com2)).toFixed(2);
+          airAvecFrais = Math.round(
+            eval(expr) + eval(com) + eval(com2)
+          ).toFixed(2);
+          mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
+          letitre.innerHTML =
+            "Transfert de La " +
+            paysO +
+            " vers Le " +
+            paysD +
+            " de " +
+            expr +
+            " xfa";
+
+          let informations = [
+            {
+              Type: "Airtel-sans-frais",
+              "Montant-TTC en xfa": Math.round(airtelSansFrais).toFixed(2),
+              "Total-commission en xfa": eval(com2),
+            },
+
+            {
+              Type: "Airtel-avec-frais",
+              "Montant-TTC en xfa": Math.round(airAvecFrais).toFixed(2),
+
+              "Total-commission en xfa": eval(com) + eval(com2),
+            },
+
+            {
+              Type: "Récuperer en main",
+              "Montant-TTC en xfa": Math.round(mainPropre).toFixed(2),
+              "Total-commission en xfa": eval(com2),
+            },
+          ];
+          const table = document.querySelector("table");
+          if (table.rows.length == 0) {
+            console.log("je suis vide");
+            let data = Object.keys(informations[0]);
+            generateTableHead(table, data);
+            generateTable(table, informations);
+          } else {
+            console.log("je ne suis donc plus vide");
+          }
         }
-      } else if (paysO == "france" && paysD == "france") {
-        // le montant est saisi en euro
-        com2 = commissionTransferteuro(expr);
-        airtelSansFrais = Math.round(eval(expr) + eval(com2)).toFixed(2);
-        letitre.innerHTML =
-          "Transfert du " + paysO + " vers La " + paysD + " de " + expr + " €";
-
-        let informations = [
-          {
-            Type: "Airtel-sans-frais",
-            "Montant-TTC en €": "Unavailable",
-            "Montant-TTC en xfa": "Unavailable",
-            "Total-commission en €": "Unavailable",
-          },
-
-          {
-            Type: "Envoie d'argent",
-            "Montant-TTC en €": airtelSansFrais,
-            "Total-commission en xfa": "Unavaible",
-            "Total-commission en €": eval(com2),
-          },
-        ];
-        const table = document.querySelector("table");
-
-        if (table.rows.length == 0) {
-          console.log("je suis vide");
-          let data = Object.keys(informations[0]);
-          generateTableHead(table, data);
-          generateTable(table, informations);
-        } else {
-          console.log("je ne suis donc plus vide");
-        }
-      } else if (paysD == "gabon" && paysO == "gabon") {
-        /*commission un pour les transfert airtel */
-        // la somme est directement saisie en xfa
-        com = commissionAirtel(expr);
-        /* ici le cas de la deuxieme commission */
-        com2 = commissionTransfertxfa(expr);
-
-        airtelSansFrais = Math.round(eval(expr) + eval(com2)).toFixed(2);
-        airAvecFrais = Math.round(eval(expr) + eval(com) + eval(com2)).toFixed(
-          2
-        );
-        mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
-        letitre.innerHTML =
-          "Transfert de La " +
-          paysO +
-          " vers Le " +
-          paysD +
-          " de " +
-          expr +
-          " xfa";
-
-        let informations = [
-          {
-            Type: "Airtel-sans-frais",
-            "Montant-TTC en xfa": Math.round(airtelSansFrais).toFixed(2),
-            "Total-commission en xfa": eval(com2),
-          },
-
-          {
-            Type: "Airtel-avec-frais",
-            "Montant-TTC en xfa": Math.round(airAvecFrais).toFixed(2),
-
-            "Total-commission en xfa": eval(com) + eval(com2),
-          },
-
-          {
-            Type: "Récuperer en main",
-            "Montant-TTC en xfa": Math.round(mainPropre).toFixed(2),
-            "Total-commission en xfa": eval(com2),
-          },
-        ];
-        const table = document.querySelector("table");
-        if (table.rows.length == 0) {
-          console.log("je suis vide");
-          let data = Object.keys(informations[0]);
-          generateTableHead(table, data);
-          generateTable(table, informations);
-        } else {
-          console.log("je ne suis donc plus vide");
-        }
+        stop();
       }
-      stop();
     }
   });
 }

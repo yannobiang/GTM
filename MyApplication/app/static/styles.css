@@ -656,6 +656,28 @@ div.divFooter {
   text-align: left;
 }
 
+.carteVisa {
+
+  display:flex; 
+  flex-direction: column; border: 2px solid; 
+  border-radius: 25px ;
+  justify-content: space-between;
+  width: 500px;
+  margin-top: 17px;
+  margin-bottom: 29px;
+  background-color: green;
+
+}
+.carteVisa-div {
+  display:flex; 
+  flex-direction: row; 
+  justify-content: space-around;
+  margin: 10px 10px 10px 10px;
+  height: 100px;
+  align-items: center;
+                
+  background-color: green;
+}
 
 @media (max-width: 1920px) and (min-width: 1200px) {
 
@@ -853,9 +875,43 @@ div.divFooter {
     }
     .img1, .img2, .img3, .image5, .img6,
     .img7, .img8, .img9 {
-        position : relative;
-        top: 3%;
-        left: 2%;
+        /*position : relative;*/
+        width: 127px;
+        height: 127px;
+    }
+    .image5 {
+      top: 179px;
+      left: 80px;
+      position: relative;
+    }
+    .img1 {
+      top: 2px;
+      left: 40px;
+    }
+    .img2 {
+      top: 220px;
+      left: 253px;
+    }
+    .img3 {
+      top: -117px;
+      left: -38px;
+    }
+
+    .img6 {
+      top: 10%;
+      left: 120px;
+    }
+    .img7 {
+      top: 52%;
+      left: -23px;
+    }
+    .img8 {
+      top: 3%;
+      left: 28%;
+    }
+    .img9 {
+      top: 10%;
+      left: 32%;
     }
     .acceuil{
       margin: 2px 2px 2px 2px;  
@@ -908,5 +964,154 @@ div.divFooter {
   .total {
     height: 100vh;
   }
+
+}
+
+
+@media (max-width: 432px) {
+
+  .contents {
+      
+      background-size: 250px;
+  }
+  #trans-title {
+    margin-left: 6%;
+}
+  .img1, .img2, .img3, .image5, .img6,
+   .img8, .img9 {
+      /*position : relative;*/
+      width: 80px;
+      height: 80px;
+  }
+  .image5 {
+    top: 179px;
+    left: 80px;
+    position: relative;
+  }
+  .img1 {
+    top: 2px;
+    left: 40px;
+  }
+  .img2 {
+    top: 139px;
+    left: -3px;
+  }
+  .img3 {
+    top: 106px;
+    left: 126px;
+  }
+
+  .img6 {
+    top: 10%;
+    left: 120px;
+  }
+  .img7 {
+    top: 52%;
+    left: -6px;
+    width: 70px;
+    height: 70px;
+  }
+  .img8 {
+    top: 3%;
+    left: 28%;
+  }
+  .img9 {
+    top: 10%;
+    left: 32%;
+  }
+  .acceuil{
+    width: 119px;
+    margin: 2px 2px 2px 2px;  
+  }
+  .acceuil h3 {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-style: italic;
+      font-weight: bold;
+      font-size: 10px;
+      margin-left: 3px !important ;
+      text-align: start;
+  
+  }
+  .estimer {
+    background-color: green;
+    border-radius: 10px 10px 10px 10px;
+    margin: 6px 2px 0px 34px;
+    width: 53px;
+}
+
+  .menu {
+    display: inline;
+  }
+  .logo {
+    margin-top: 10px;
+    margin-left: 2px;
+  }
+  .nav-list {
+    list-style-type: none;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+    display: none;
+  }
+  .nav-list .list-items {
+    display: block;
+    border-top: 1px solid white;
+  }
+  .active {
+    display: block;
+  }
+  .invoice-box table tr.top table td {
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin: 2px 2px 2px 2px;
+  }
+  
+  .invoice-box table tr.information table td {
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin: 2px 2px 2px 2px;
+  }
+
+  #bubble {
+    width: 179px;
+    height: 79px;
+    top: 0px;
+  }
+
+  #bubble li {
+    font-size: 12px;
+  }
+  #arrow_inner {
+    display: none;
+}
+footer {
+  bottom: 74px;
+}
+.result-estimer fieldset {
+
+  width: 101%;
+  margin: 70px 6px 2px 8px;
+  background-color: #763789;
+}
+.btn-estimate {
+  
+  font-size: 15px;
+  font-family: "Times New Roman", Times, serif;
+  font-style: normal;
+  text-align: center;
+}
+#table-estimation {
+  border: none;
+  background-color: inherit;
+}
+.carteVisa {
+  width: 300px;
+}
+.carteVisa-div {
+
+  margin: 5px 5px 5px 5px;
+}
 
 }
