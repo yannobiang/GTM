@@ -1,11 +1,13 @@
 {
   "builds": [
-    {"src": "Myapplication/app/module_one/app.py", 
+    {
+"src": "Myapplication/app/module_one/app.py", 
 "use": "@vercel/python"},
 "config": { "maxLambdaSize": "15mb" }
   ],
   "routes": [
     {"src": "/(.*)", 
-"dest": "Myapplication/app/module_one/app.py"}
+"dest": "Myapplication/app/module_one/app.py"
+    }
   ]
 }
