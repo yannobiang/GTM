@@ -96,7 +96,7 @@ def verify():
         if data["transfert"] == "paypal" and data["pays_origine"] == "france":
             montant = data['montant']
             pays = data['pays_origine']
-            minDict = json.dumps({montant : montant, pays : pays})
+            minDict = json.dumps({"montant" : montant, "pays" : pays})
             return redirect(f"/paypal_payment/{minDict}")
 
         elif data["choix"] == "airtelmoney" and data["transfert"] == "prendreargent":
@@ -226,8 +226,8 @@ def paypal_payment(montant):
 
         # Redirect URLs
         "redirect_urls": {
-            "return_url": url_for("/succes"),
-            "cancel_url": url_for("/echec")
+            "return_url": url_for("succes"),
+            "cancel_url": url_for("echec")
             },
 
         # Transaction
@@ -323,7 +323,7 @@ def charge():
             request.form['stripeEmail']])
             msg.body = "Bonjour, je vous remercie de votre transfert. Vous recevrez une facture dans un delai de 24 heures."
             mail.send(msg)
-            return "sent email"
+            return redirect(url_for("succes"))
         except :
             print("le quota de mail journalier a été dépassé.")
             return "Vous devriez être informer de la transaction dans 3 minutes"
