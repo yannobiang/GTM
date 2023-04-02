@@ -95,7 +95,9 @@ def verify():
     
         if data["transfert"] == "paypal" and data["pays_origine"] == "france":
             montant = data['montant']
-            return redirect(f"/paypal_payment/{montant}")
+            pays = data['pays_origine']
+            minDict = json.dumps({montant : montant, pays : pays})
+            return redirect(f"/paypal_payment/{minDict}")
 
         elif data["choix"] == "airtelmoney" and data["transfert"] == "prendreargent":
             print(" je suis bien entré")
@@ -160,7 +162,7 @@ def airtelmoney(data):
                             airtelCom = airtelCom, comTransfert = comTransfert)
     
     html = HTML(string=rendered)
-    rendered_pdf = html.write_pdf()
+    #rendered_pdf = html.write_pdf()
     
     ############################## send invoice per email ##################################
 
@@ -204,6 +206,15 @@ def paypal_payment(montant):
     # Payment
     # A Payment Resource; create one using
     # the above types and intent as 'sale'
+    data_dict = json.loads(montant)
+    print(data_dict)
+    info = Estimation(data_dict["montant"], data_dict["pays"])
+    envoieAirtel = info.send()["envoieAirtel"]
+    
+    airtelCom = info.send()["airtelCom"]
+    comTransfert = info.send()["comTransfert"]
+    envoieSansAirtel = info.send()["envoieSansAirtel"]
+    
     payment = paypal.Payment({
         "intent": "sale",
 
@@ -215,14 +226,15 @@ def paypal_payment(montant):
 
         # Redirect URLs
         "redirect_urls": {
-            "return_url": url_for("succes"),
-            "cancel_url": url_for("echec")
+            "return_url": url_for("/succes"),
+            "cancel_url": url_for("/echec")
             },
 
         # Transaction
         # A transaction defines the contract of a
         # payment - what is the payment for and who
         # is fulfilling it.
+        
         "transactions": [{
 
             # ItemList
@@ -230,14 +242,14 @@ def paypal_payment(montant):
                 "items": [{
                     "name": "item",
                     "sku": "item",
-                    "price": f"{montant}",
+                    "price": f"{envoieSansAirtel}",
                     "currency": "EUR",
                     "quantity": 1}]},
 
             # Amount
             # Let's you specify a payment amount.
             "amount": {
-                "total": f"{montant}",
+                "total": f"{envoieSansAirtel}",
                 "currency": "EUR"},
             "description": "test 123 This is the payment transaction description."}]})
 
@@ -264,8 +276,12 @@ def paypal_payment(montant):
 def confirmation(data):
     #data = json.loads(request.args.get('montant'))
     data_dict = json.loads(data)
+    
+    info = Estimation(data_dict["montant"], data_dict["pays_origine"])
+    envoieSansAirtel = info.send()["envoieSansAirtel"]
+    
     url_image =  'new_logo.jpg'
-    max_valu = 300
+    max_valu = envoieSansAirtel
     email = data_dict["email"]
     #email = request.args.get('email')
     #dict_table = dict(json.loads(os.environ['table']))
@@ -285,7 +301,7 @@ def charge():
     data = request.form
     print(request.args)
     # Amount in cents
-    amount = request.args.get('ammount')
+    amount = int(float(request.args.get('ammount')))
 
     customer = stripe.Customer.create(
         email=request.form['stripeEmail'],
@@ -294,17 +310,18 @@ def charge():
 
     charge = stripe.Charge.create(
         customer=customer.id,
-        amount=amount,
+        amount = amount,
         currency='eur',
         description='transfert argent via Gabontransmoney'
     )
+    print(charge)
 
     if request.method == 'POST':
         
         try :
             msg = Message('Bonjour cher', sender = 'yannobiang3@gmail.com', recipients = ['enguienancy@gmail.com',
-            'bermudezjoseline00@gmail.com'])
-            msg.body = "Hey Paul, sending you this email from my Flask app, lmk if it works"
+            request.form['stripeEmail']])
+            msg.body = "Bonjour, je vous remercie de votre transfert. Vous recevrez une facture dans un delai de 24 heures."
             mail.send(msg)
             return "sent email"
         except :

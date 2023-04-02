@@ -414,7 +414,7 @@ if (send_button != null) {
           ).toFixed(2);
           mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
           letitre.innerHTML =
-            "Transfert de La " +
+            "transfert : La " +
             paysO +
             " vers Le " +
             paysD +
@@ -584,7 +584,7 @@ if (send_button != null) {
           ).toFixed(2);
           mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
           letitre.innerHTML =
-            "Transfert de La " +
+            "transfert : La " +
             paysO +
             " vers Le " +
             paysD +
@@ -686,7 +686,7 @@ if (send_button != null) {
           ).toFixed(2);
           mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
           letitre.innerHTML =
-            "Transfert de La " +
+            "transfert : La " +
             paysO +
             " vers Le " +
             paysD +
@@ -761,7 +761,7 @@ if (send_button != null) {
               "Montant-TTC en xfa": Math.round(
                 eval(airtelSansFrais * euro)
               ).toFixed(2),
-              "Total-commission en €": eval(com2),
+              "Total-commission en €": Math.round(eval(com2)).toFixed(2),
             },
 
             {
@@ -770,7 +770,9 @@ if (send_button != null) {
               "Montant-TTC en xfa": Math.round(
                 eval(airAvecFrais * euro)
               ).toFixed(2),
-              "Total-commission en €": eval(com) + eval(com2),
+              "Total-commission en €": Math.round(
+                eval(com) + eval(com2)
+              ).toFixed(2),
             },
 
             {
@@ -779,7 +781,7 @@ if (send_button != null) {
               "Montant-TTC en xfa": Math.round(eval(mainPropre) * euro).toFixed(
                 2
               ),
-              "Total-commission en €": eval(com2),
+              "Total-commission en €": Math.round(eval(com2)).toFixed(2),
             },
           ];
           const table = document.querySelector("table");
@@ -814,7 +816,7 @@ if (send_button != null) {
             {
               Type: "Envoie d'argent",
               "Montant-TTC en €": airtelSansFrais,
-              "Total-commission en €": eval(com2),
+              "Total-commission en €": Math.round(eval(com2)).toFixed(2),
             },
           ];
           const table = document.querySelector("table");
@@ -840,7 +842,7 @@ if (send_button != null) {
           ).toFixed(2);
           mainPropre = Math.round(eval(expr) + eval(com2)).toFixed(2);
           letitre.innerHTML =
-            "Transfert de La " +
+            "transfert : La " +
             paysO +
             " vers Le " +
             paysD +
@@ -852,14 +854,16 @@ if (send_button != null) {
             {
               Type: "Airtel-sans-frais",
               "Montant-TTC en xfa": Math.round(airtelSansFrais).toFixed(2),
-              "Total-commission en xfa": eval(com2),
+              "Total-commission en xfa": Math.round(eval(com2)).toFixed(2),
             },
 
             {
               Type: "Airtel-avec-frais",
               "Montant-TTC en xfa": Math.round(airAvecFrais).toFixed(2),
 
-              "Total-commission en xfa": eval(com) + eval(com2),
+              "Total-commission en xfa": Math.round(
+                eval(com) + eval(com2)
+              ).toFixed(2),
             },
 
             {
