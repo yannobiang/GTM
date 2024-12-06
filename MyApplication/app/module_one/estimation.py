@@ -73,10 +73,10 @@ class Estimation():
                 comTrans = (math.floor(self.montant/100000) * 1500) + 3000
             
         elif self.pays == 'france':
-            if self.montant > 0 and self.montant <= 9.14 :
-                comTrans = (500/self.euro) + 0.5
-            elif self.montant > 9.14:
-                comTrans =  round(((self.montant /4.57) * (45/self.euro)) + (500/self.euro),2) + 0.5
+            if self.montant > 0 and self.montant <= 50 :
+                comTrans = 1.9
+            elif self.montant > 50:
+                comTrans =  round((self.montant * 4 /100)) 
        
         return comTrans
 
