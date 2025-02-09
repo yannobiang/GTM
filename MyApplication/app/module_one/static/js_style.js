@@ -180,7 +180,7 @@ function commissionTransfertxfa(expr) {
 }
 
 function commissionTransferteuro(expr) {
-  if (eval(expr) <= 50) {
+  if (eval(expr) <= 500) {
     commi = 1.9;
   } else {
     commi = Math.round(eval((eval(expr) * 4) / 100)).toFixed(2);
